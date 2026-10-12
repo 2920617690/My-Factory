@@ -1,0 +1,173 @@
+My Factory MVP 0.1 — Harness Runtime / Plugin Track 独立开发任务书
+
+Phase 1A/1B：基于已完成 DeepSeek Harness + Factory Tool POC 继续工程化
+
+文档定位：基于已完成独立 POC 的 Phase 1 延续开发任务书，可直接交给 Codex / ChatGPT Work 执行。
+
+共享前提：必须遵守《三并行开发 Track 共享集成规范》和《三重点工作目标与验收总指导》；本任务书不重复验证 POC 已证明的基础可行性。
+
+1. 当前起点与执行原则
+
+本任务以“DeepSeek Harness 工厂大脑与插件化 Runtime POC 已完成并通过独立验证”为起点。不得把主要工期重新用于复现 POC；如现有 POC 代码可获得，应优先审计并迁移其中已经验证通过的实现。若代码不可获得，才按 POC 结论重建最小等价实现。
+
+本阶段首先执行开源复用 Gate：任何通用能力在自研前，都必须检索成熟开源方案，并记录 Adopt / Reference / Reject、许可证、活跃度、锁定版本/commit 与理由。
+
+优先许可证：MIT、Apache-2.0、BSD、PostgreSQL License。
+
+AGPL、商业闭源核心、云平台强绑定、许可证不清晰的项目不得直接成为核心依赖。
+
+所有依赖必须锁定版本或 commit；不使用 alpha/beta 作为默认生产基线。
+
+不能因为其他 Track 尚未完成而停止开发，必须使用约定 Mock 独立运行。
+
+禁止绕过共享集成边界建立临时直连。
+
+2. 角色与唯一职责
+
+Track：Harness Runtime / Plugin System
+
+唯一主责：负责“能力与执行”：Harness Adapter、Plugin Registry、Capability Discovery、Plugin Invocation、Execution Result/Trace、Data Contract Plugin 和第一批 Factory Plugins。
+
+明确不负责：
+
+不实现 Frontend。
+
+不拥有 My Factory Task 生命周期。
+
+不直接写 Factory State/PostgreSQL。
+
+不直接向 WebSocket 推送。
+
+不把 LLM 作为所有任务的必经路径；确定性能力可直接执行 Plugin。
+
+3. 与其他 Track 的独立开发方式
+
+本 Track 必须在另外两个 Track 均不存在的情况下独立开发和验收。
+
+依赖方向 | 本阶段替代方式 | 融合时替换为
+
+Runtime ← Platform | ExecutionRequest Fixture / CLI Test | 真实 Platform RuntimeClient 调用
+
+Runtime → Factory State | 只读 Fixture/Mock Context | 未来通过受控 Platform Context/API
+
+Runtime → Frontend | 禁止直连 | 仍禁止直连，结果统一回 Platform
+
+4. 融合边界
+
+My Factory 依赖 Harness Adapter，而不是直接依赖 DeepSeek Harness 内部 API。
+
+Plugin 通过 Registry 注册/发现/调用；业务层禁止直接 import 插件实现。
+
+Capability 是对外稳定语义；具体 Plugin 名称、Harness profile、Cordis 实现不得泄露给 Frontend。
+
+ExecutionResult/Trace 必须结构化并携带 task_id/execution_id。
+
+Data Contract Plugin 是基础插件能力，只做注册/校验/转换/版本解析，不在本阶段冻结完整工厂业务 Schema。
+
+5. 开源复用 Gate
+
+能力 | 优先审查项目 | 默认决策方向
+
+Agent/Plugin Runtime | deepseek-ai/deepseek-harness | ADOPT，通过 Adapter 隔离
+
+Validation/Schema | Pydantic / JSON Schema | ADOPT
+
+Plugin protocol | 优先复用 Harness/Cordis 已有插件机制 | ADOPT/REFERENCE，不另造一套并行插件框架
+
+远程工具协议 | MCP | REFERENCE；仅在跨进程/跨系统工具暴露有价值时引入
+
+代码沙箱 | 成熟隔离方案需单独安全评审 | 本阶段仅保留接口/受控 POC，不自称生产安全
+
+必须产出 docs/track-runtime/open_source_review.md；特别记录 Harness 锁定 commit、SDK/profile 差异、第三方许可证和安全限制。
+
+6. 具体开发阶段
+
+阶段 | 工作内容
+
+R0 现有 POC 审计 | 定位 Harness POC；确认真实模型回合、Factory Tool 注册调用、任务轨迹等已验证代码；优先迁移 Adapter/Plugin 代码，不重复验证基础 SDK。
+
+R1 Harness Adapter | 建立 MyFactoryRuntimeAdapter；隔离 DeepSeek Harness profile/SDK/JSON-RPC 等实现细节。
+
+R2 Plugin Registry | 实现 Register/Discover/Invoke/Result/Error；Capability 与 Plugin 分离。
+
+R3 Execution Protocol | 定义内部 ExecutionRequest/ExecutionResult/ExecutionTrace 最小模型；保持 task_id/execution_id 贯穿。
+
+R4 Data Contract Plugin | 实现 register/validate/transform/resolve_version；只使用少量 Mock Contract 验证机制。
+
+R5 Factory Plugins | 实现 Inventory Mock Plugin、Equipment Mock Plugin；inventory.analyze 为首个联合 capability。
+
+R6 Deterministic vs Brain | 确定性调用允许直接 Plugin；需要推理/组合时再经过 Harness/Factory Brain。两种执行都输出一致 ExecutionResult。
+
+R7 Platform Handoff | 提供可被 Platform RuntimeClient 调用的稳定 service/API 或进程边界，并给出 Mock→Real 替换说明。
+
+7. 首个 Capability
+
+capability: inventory.analyze
+target: WH-001
+context:
+  material_id: MAT-001
+  order_id: ORD-001
+
+ExecutionRequest
+→ Registry discovers capability
+→ Inventory Plugin
+→ structured result
+→ ExecutionTrace
+→ ExecutionResult
+
+
+第一阶段结果可以基于 Mock Fixture，不要求正式库存优化算法。数值计算必须由 Tool/Plugin 决定，不允许模型猜测。
+
+8. Data Contract Plugin 最小机制
+
+register(contract)
+validate(contract_id, payload)
+transform(source_contract, target_contract, payload)
+resolve_version(contract_id, requested_version)
+
+
+Frontend 不直接调用 Data Contract Plugin。
+
+Platform/Runtime/External Adapter 可通过稳定接口使用其能力。
+
+无匹配 Contract、版本冲突、转换失败必须结构化失败。
+
+不在本阶段建立庞大的 Equipment/Inventory 全量 Schema。
+
+9. 自动测试与验收
+
+Plugin Registry：注册、重复注册、发现、未找到 capability、调用成功/失败。
+
+Inventory Plugin：正常分析、未知物料、非法参数。
+
+Data Contract Plugin：validate/transform/version 成功与失败。
+
+Harness Adapter：至少保留与已完成 POC 一致的真实 Harness 集成路径；若当前环境无凭据，不能伪造模型调用成功。
+
+Execution Trace 包含 task_id、execution_id、capability、plugin、start/end/status/result/error。
+
+Runtime 在没有 Frontend/Platform 的情况下可通过 Fixture/CLI 完成 inventory.analyze。
+
+Plugin 不直接访问 Platform PostgreSQL。
+
+10. 交付物
+
+Harness Adapter。
+
+Plugin Registry / Capability Registry。
+
+ExecutionRequest/Result/Trace 模型。
+
+Data Contract Plugin。
+
+Inventory / Equipment Mock Plugins。
+
+Fixture 与独立测试。
+
+docs/track-runtime/open_source_review.md。
+
+docs/track-runtime/handoff_platform.md：调用方式、错误模型、生命周期、真实 Harness 启动/配置边界。
+
+11. Runtime Track PASS 标准
+
+无需 Frontend/Platform 即可通过标准 ExecutionRequest 完成 capability discovery → plugin invoke → structured result → execution trace；且 Platform 接入时只需替换 Fixture 调用入口，不重写 Runtime 业务，才判 PASS。

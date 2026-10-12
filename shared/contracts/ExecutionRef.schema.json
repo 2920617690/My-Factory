@@ -1,0 +1,32 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "execution_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Execution Id",
+      "type": "string"
+    },
+    "task_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "RUNNING",
+        "COMPLETED",
+        "FAILED"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "execution_id",
+    "task_id",
+    "status"
+  ],
+  "title": "ExecutionRef",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

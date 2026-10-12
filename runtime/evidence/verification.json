@@ -1,0 +1,36 @@
+{
+  "scope": "MVP Runtime independent acceptance",
+  "checked_on": "2026-10-12",
+  "status": "PASS",
+  "unit_tests": {
+    "run": 30,
+    "failures": 0,
+    "errors": 0
+  },
+  "fixture_runs": [
+    {
+      "case": "inventory",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "legacy-context",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "equipment",
+      "status": "COMPLETED"
+    }
+  ],
+  "unchanged_poc_business_copy": true,
+  "unchanged_fixture_copy": true,
+  "public_schemas": 11,
+  "frontend_dependency": false,
+  "platform_dependency": false,
+  "official_model_calls_in_this_command": 0,
+  "task_lifecycle_owner": "platform",
+  "production_ready": false,
+  "license_gate": "REVIEW_REQUIRED",
+  "integration_gate_1": "NOT_RUN",
+  "integration_gate_2": "NOT_RUN",
+  "simulation_gate": "NOT_RUN"
+}

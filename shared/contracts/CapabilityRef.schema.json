@@ -1,0 +1,22 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "capability_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Capability Id",
+      "type": "string"
+    },
+    "version": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "capability_id",
+    "version"
+  ],
+  "title": "CapabilityRef",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

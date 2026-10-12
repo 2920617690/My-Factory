@@ -1,0 +1,27 @@
+{
+  "schema_version": "mf.execution.v1",
+  "task_id": "TASK-EQ-001",
+  "execution_id": "EXEC-EQ-001",
+  "capability": {
+    "capability_id": "equipment.inspect",
+    "version": "1.0.0"
+  },
+  "target": {
+    "entity_id": "EQ-001",
+    "entity_type": "equipment"
+  },
+  "context": {
+    "equipment": {
+      "entity_id": "EQ-001",
+      "floor": 1,
+      "status": "idle",
+      "data_mode": "mock"
+    }
+  },
+  "parameters": {},
+  "policy": {
+    "mode": "deterministic",
+    "read_only": true,
+    "timeout_seconds": 30
+  }
+}

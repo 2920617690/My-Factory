@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "source_docs_unchanged": 4,
+  "identical_fixture_copies": 4,
+  "fixture_sha256": "f86cf24391997655c70f4405a1335ea0d6cf346422f2b3f2749e7428a30f0290",
+  "poc_business_source_unchanged": true,
+  "original_poc_git_tracked_diff": "EMPTY"
+}

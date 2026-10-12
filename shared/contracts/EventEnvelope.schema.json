@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "EventReferences": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Id"
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Id"
+        },
+        "execution_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Execution Id"
+        }
+      },
+      "title": "EventReferences",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "mf.event.v1",
+      "default": "mf.event.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "event_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_type": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Event Type",
+      "type": "string"
+    },
+    "timestamp_utc": {
+      "title": "Timestamp Utc",
+      "type": "string"
+    },
+    "source": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Source",
+      "type": "string"
+    },
+    "refs": {
+      "$ref": "#/$defs/EventReferences"
+    },
+    "payload": {
+      "additionalProperties": true,
+      "title": "Payload",
+      "type": "object"
+    }
+  },
+  "required": [
+    "event_id",
+    "event_type",
+    "timestamp_utc",
+    "source",
+    "refs",
+    "payload"
+  ],
+  "title": "EventEnvelope",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

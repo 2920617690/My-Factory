@@ -1,0 +1,346 @@
+My Factory MVP 0.1
+三重点工作目标与验收总指导
+
+Frontend / Platform Core / Harness Runtime & Plugin System
+
+文档定位：三个并行开发 Work 的总目标、范围边界与验收基线
+
+1. 文档目的与当前阶段
+
+本文件作为 My Factory MVP 0.1 三个重点并行工作的总指导文件。它不替代具体开发任务书，而是规定每个 Track 要解决什么问题、做到什么程度才算完成，以及三条线在第一次系统融合前必须提供哪些可验证证据。
+
+当前三个重点工作为：
+
+Track A：Frontend / Digital Twin —— 可交互数字工厂与管理入口。
+
+Track B：Platform Core —— Factory State、Application API、Task/Event Runtime 与实时推送。
+
+Track C：Harness Runtime / Plugin System —— Harness Adapter、Plugin Registry、Data Contract Plugin 与 Factory Plugins。
+
+总体系统闭环：
+
+User
+  ↓
+Digital Twin Frontend
+  ↓
+Application API
+  ↓
+Task Runtime
+  ↓
+Harness Adapter / Plugin Runtime
+  ↓
+Factory Plugin
+  ↓
+Result / State Change
+  ↓
+Factory State + Event
+  ↓
+WebSocket
+  ↓
+Digital Twin Update
+
+2. 三个 Track 共同遵守的总原则
+
+每个 Track 必须能够独立使用 Mock/Fixture 运行和验收，不等待其他 Track 完成。
+
+Frontend 只通过 Platform 的 HTTP/WebSocket 交互，不直接访问数据库、Harness 或 Plugin。
+
+Platform 持有 My Factory 的 Factory State、Task/Event 生命周期；Harness 不拥有平台任务状态。
+
+Runtime 只接收执行请求并返回 Execution Result，不直接控制 UI，不直接维护 Platform 数据库。
+
+Plugin 通过 Registry 被发现和调用，禁止业务代码直接 import 某个具体 Plugin 实现形成隐性耦合。
+
+Data Contract 作为插件/基础能力处理 register、validate、transform、version resolution；当前不冻结完整业务 Schema。
+
+所有通用基础能力在自研前先执行 Open-source Reuse Gate：开源检索 → 许可证 → 成熟度 → 集成成本 → Adopt / Reference / Reject → 锁定版本/commit。
+
+第一轮系统融合只验证最小业务闭环，不提前实现复杂排产、真实 ERP/WMS、NATS、Kubernetes、CAD/BIM 或生产级沙箱。
+
+3. 共享集成对象与首个联合验收场景
+
+三个 Track 在 MVP 0.1 第一轮联调中统一使用以下 Demo 对象，避免各自创造不同命名。
+
+类型 | 统一 ID / 示例
+
+Factory | FACTORY-001
+
+Equipment | EQ-001, EQ-002
+
+Warehouse | WH-001
+
+Workstation | WS-001, WS-002
+
+AGV | AGV-001, AGV-002
+
+Material | MAT-001
+
+Order | ORD-001
+
+首个联合 Capability 固定为 inventory.analyze，目标场景：
+
+选择 WH-001
+→ 点击“库存分析”
+→ Platform 创建 Task
+→ Runtime 调用 inventory.analyze
+→ Inventory Plugin 返回 Mock 分析结果
+→ Task 完成并产生 Event
+→ Frontend 展示结果与 Execution Trace
+
+4. Track A — Frontend / Digital Twin
+
+4.1 总目标
+
+构建一个可以独立运行的 Digital Factory Workspace，使用户能够“看工厂、选对象、看状态、发起动作、看任务结果”。前端是 My Factory 的主要产品入口，但不承担业务决策和权威状态管理。
+
+4.2 必须完成的能力
+
+完成 Digital Factory Workspace：Top Bar、Navigation、3D Twin、Context Panel、Task/Event/Execution Center。
+
+构建至少双层工厂场景，支持 Equipment、Warehouse、Workstation、AGV 四类可选实体。
+
+支持楼层切换、相机控制/复位、对象选中、选中高亮与 Context Panel 联动。
+
+建立 Frontend Adapter / FactoryClient，3D 与 React 业务组件不得直接解析后端原始格式。
+
+Zustand 仅保存 selectedEntity、selectedFloor、camera、panel 等 UI 状态；TanStack Query 管理服务端状态。
+
+通过 MSW 或等价 Mock 层模拟 Platform API/WebSocket，使前端可在 Platform 未完成时独立验收。
+
+实现 inventory.analyze 的 Action 入口、Task Running/Completed/Failed 展示、Execution Trace 展示占位或最小实现。
+
+保留 Factory Brain 交互入口和 Simulation 入口，但不要求本轮实现真实 LLM 或仿真。
+
+4.3 明确不属于本 Track 的职责
+
+Factory State 权威存储
+
+Task 调度与 Plugin 选择
+
+直接调用 DeepSeek Harness
+
+直接访问 PostgreSQL
+
+库存/排产/AGV 等业务算法
+
+真实 ERP/WMS 数据适配
+
+4.4 验收要求
+
+验收项 | PASS 条件 | 证据
+
+工程可运行 | 本地可启动、build/typecheck/lint 通过 | 命令输出、构建日志
+
+数字孪生场景 | 双层工厂可显示，四类实体存在 | 截图/录屏、E2E
+
+对象交互 | EQ-001/WH-001/WS-001/AGV-001 均可选中并联动 Context Panel | Playwright 用例
+
+状态边界 | 3D 组件无直接 HTTP/Harness/DB 调用 | 代码审查记录
+
+Mock 独立运行 | 无 Platform 时，MSW/Mock API 可完整演示库存分析任务状态 | 浏览器证据、网络记录
+
+真实 API 可切换 | 切换到 FastAPI 后前端业务组件无需改动 | 配置差异与联调结果
+
+任务反馈 | 可显示 CREATED/RUNNING/COMPLETED/FAILED 至少核心状态 | UI/E2E
+
+首个联合能力 | WH-001 → inventory.analyze 动作入口可发起标准 Action/Task 请求 | 请求记录、E2E
+
+4.5 Track A Done Definition
+
+在没有真实 Platform/Runtime 的情况下，前端使用 Mock 即可完整演示：进入数字工厂 → 选择 WH-001 → 查看状态 → 发起库存分析 → 看到任务运行与完成结果。此时即可进入三方联调。
+
+5. Track B — Platform Core
+
+5.1 总目标
+
+建立 My Factory 的状态与任务中枢，使 Frontend 有唯一业务入口，使 Runtime 有稳定执行边界。Platform Core 必须维护 Factory State、Task/Event 生命周期，并通过 REST/WebSocket 对外提供统一平台能力。
+
+5.2 必须完成的能力
+
+以 FastAPI + PostgreSQL 为基线建立 Application API 与持久化能力，优先复用成熟开源模板和现有认证/迁移/测试基础。
+
+实现最小 Factory State Service，支持 Entity、Current State、Relations、Active Tasks 的查询。
+
+实现 Task Runtime：至少 CREATED → QUEUED → RUNNING → COMPLETED/FAILED。
+
+实现 Event Runtime：任务与状态变化产生 Event，可查询并通过 WebSocket Gateway 通知前端。
+
+建立 RuntimeClient 抽象，同时提供 MockRuntimeClient 与真实 HarnessRuntimeClient 的接入位置。
+
+Runtime 返回的 Result 必须经过 Platform 校验后才能写入 Factory State；禁止 Plugin 直接更新数据库。
+
+提供前端第一阶段需要的 /api/v1/ 查询与 Task 创建接口；具体字段保持最小，不提前固化复杂业务 Schema。
+
+建立结构化日志和跨模块 trace 关联，至少携带 task_id / execution_id / entity_id。
+
+5.3 明确不属于本 Track 的职责
+
+LLM Agent Loop
+
+Plugin 内部算法
+
+3D 场景和前端组件
+
+真实工业算法实现
+
+直接维护 Harness Session UI
+
+生产级分布式工作流引擎
+
+5.4 验收要求
+
+验收项 | PASS 条件 | 证据
+
+基础服务 | FastAPI/PostgreSQL 可启动、迁移可执行、测试可重复 | 启动日志、pytest
+
+Factory State | 可查询 FACTORY-001、WH-001 等对象及当前状态 | API 测试
+
+Task 生命周期 | 创建 Task 后可完整推进到 COMPLETED/FAILED | 状态迁移测试
+
+Runtime 隔离 | MockRuntimeClient 可在没有 Harness 时独立执行 | 单元/集成测试
+
+Event 机制 | task.created/started/completed/failed 至少可产生并查询 | Event 测试
+
+WebSocket | 事件可推送前端，断线后前端可通过重新查询恢复权威状态 | WebSocket 测试
+
+状态写入边界 | Plugin Result 不直接写 DB，由 Platform 校验并应用 | 代码审查/测试
+
+首个联合能力 | POST inventory analyze 任务可触发 RuntimeClient 并返回可追踪 task_id | API 集成测试
+
+5.5 Track B Done Definition
+
+在没有真实 Frontend/Harness 的情况下，通过 API + MockRuntimeClient 可以完成：创建 inventory.analyze Task → RUNNING → Mock Execution Result → Event → COMPLETED，并能查询最终 Task、Event 和 Factory State。
+
+6. Track C — Harness Runtime / Plugin System
+
+6.1 总目标
+
+建立 My Factory 的可替换智能执行层，使平台可以通过统一 Runtime Adapter 调用 DeepSeek Harness 和 Factory Plugins。Runtime 的价值是“发现能力、执行能力、返回可审计结果”，而不是拥有 My Factory 的业务状态。
+
+6.2 必须完成的能力
+
+实现 Harness Adapter，隔离 My Factory 与 DeepSeek Harness SDK/Profile 的版本变化。
+
+实现 Plugin Registry：Register、Discover、Invoke、Result、Error 五个最小生命周期。
+
+定义 Capability 级调用语义，Platform 面向 capability，不依赖具体 Plugin 类名。
+
+实现最小 Inventory Plugin 与 Equipment Plugin；业务结果可以 Mock，但注册与调用机制必须真实。
+
+实现 Data Contract Plugin 骨架：register、validate、transform、resolve_version，并基于 Pydantic/JSON Schema 等成熟组件复用校验能力。
+
+实现 Execution Trace：至少 task_id、execution_id、plugin_id、capability、start/end、status、result/error。
+
+Runtime 接收标准 Execution Request，返回标准 Execution Result；不得依赖 React、WebSocket 或数据库表结构。
+
+对 DeepSeek Harness、插件依赖和新增开源组件完成许可证、成熟度与版本锁定记录。
+
+6.3 明确不属于本 Track 的职责
+
+维护 My Factory Task 状态机
+
+直接更新 Platform PostgreSQL
+
+向 Frontend 发送 WebSocket
+
+决定前端页面或按钮
+
+把 Harness 变成系统唯一控制中心
+
+实现生产级代码沙箱（本轮仅预留边界）
+
+6.4 验收要求
+
+验收项 | PASS 条件 | 证据
+
+Harness Adapter | Platform 侧只依赖 Adapter/RuntimeClient，不直接依赖 Harness SDK | 接口与代码审查
+
+Plugin Registry | Inventory/Equipment/DataContract Plugin 可注册、发现、调用 | Registry 测试
+
+Capability 调用 | inventory.analyze 可以通过 capability 被调用而非硬编码类名 | 集成测试
+
+Data Contract | 至少两个 Mock Contract 可注册、校验、转换、解析版本 | 单元测试
+
+Execution Trace | 成功/失败调用均留下完整 trace | 日志/JSON 证据
+
+错误隔离 | 未知 capability、非法输入、Plugin 异常返回结构化 Error | 异常测试
+
+独立运行 | 无需 Frontend/Platform，使用 Fixture 即可执行 inventory.analyze | CLI/测试结果
+
+首个联合能力 | 标准 Execution Request 输入后返回标准 Execution Result，可供 Platform 消费 | Contract/集成测试
+
+6.5 Track C Done Definition
+
+在没有正式 Platform/Frontend 的情况下，Runtime 使用 Fixture 接收 inventory.analyze Execution Request，能够完成 capability discovery → Plugin invoke → Data Contract 校验/转换 → Execution Result → Trace，并对异常返回结构化错误。
+
+7. 三条 Track 的第一次融合验收 Gate
+
+三个 Track 独立 PASS 后，执行第一次系统联调。第一轮只验证调用链，不验证真实工业算法。
+
+Frontend 选择 WH-001 并发起 inventory.analyze。
+
+Platform 创建 task_id，并将任务推进至 RUNNING。
+
+Platform 通过 RuntimeClient 调用 Runtime。
+
+Runtime 通过 Plugin Registry 找到 Inventory Plugin 并执行。
+
+Runtime 返回 Execution Result 和 Trace。
+
+Platform 保存结果，Task 进入 COMPLETED，并产生 Event。
+
+WebSocket 推送通知，Frontend 重新查询并展示最终结果。
+
+Gate 条件 | 必须满足
+
+接口替换 | 三条 Track 从 Mock 切换到真实对端时，不修改核心业务组件/逻辑
+
+追踪性 | task_id / execution_id 可以贯穿 Platform → Runtime → Plugin → Event
+
+状态权威 | 最终 Task/Factory State 以 Platform 为准，前端事件仅用于通知
+
+解耦 | Frontend 不出现 Harness/Plugin 依赖；Runtime 不出现 React/DB 依赖
+
+失败路径 | Plugin 失败后 Task 正确 FAILED，Frontend 可显示错误，不出现悬挂 RUNNING
+
+可重复 | 同一 Demo 数据可多次跑通，不依赖手工修改数据库或源码
+
+8. 第二阶段联合 Gate（在第一次 Gate 之后）
+
+第一次调用闭环通过后，再验证“Plugin 执行能够改变数字工厂状态”：
+
+Plugin Result
+→ Platform Business Validation
+→ Factory State Update
+→ inventory.changed Event
+→ WebSocket
+→ Frontend Query Invalidation
+→ Digital Twin Update
+
+该 Gate 通过后，再考虑接入 Simulation Track。仿真必须使用独立 Simulation State，不得直接覆盖 Live Factory State。
+
+9. 三个 Work 的统一交付格式
+
+每个 Work 完成时必须以证据为中心汇报，至少包含：
+
+实际采用/复用的开源项目、仓库、许可证、锁定版本或 commit，以及 Adopt / Reference / Reject 决策。
+
+创建/修改的文件清单。
+
+实际执行命令和运行方式。
+
+自动测试结果与失败测试。
+
+截图、API 输出、日志或 Execution Trace 等可观察证据。
+
+未完成项按 BLOCKER / NEXT PHASE / LATER 分类。
+
+逐条对照本文件验收项给出 PASS / FAIL / BLOCKED，不能仅凭“代码已写完”判断完成。
+
+10. 最终总判定
+
+三个 Track 的阶段性成功标准不是“各自功能很多”，而是：
+
+每个模块都可以独立 Mock 运行，同时把 Mock 换成真实对端后，不需要重写核心业务逻辑。
+
+当 Frontend、Platform、Runtime 三个 Track 均通过独立 Done Definition，并且 inventory.analyze 的第一次三方 Integration Gate 通过，即可判定 My Factory MVP 0.1 的第一轮系统融合基础完成。

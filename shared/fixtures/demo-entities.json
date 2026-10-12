@@ -1,0 +1,35 @@
+{
+  "factory": "FACTORY-001",
+  "floors": [
+    {
+      "entity_id": "F1",
+      "floor": 1
+    },
+    {
+      "entity_id": "F2",
+      "floor": 2
+    }
+  ],
+  "warehouse": [
+    "WH-001"
+  ],
+  "equipment": [
+    "EQ-001",
+    "EQ-002"
+  ],
+  "workstations": [
+    "WS-001",
+    "WS-002"
+  ],
+  "agv": [
+    "AGV-001",
+    "AGV-002"
+  ],
+  "material": [
+    "MAT-001"
+  ],
+  "order": [
+    "ORD-001"
+  ],
+  "note": "MVP references; original B location IDs and all original fixtures remain unchanged."
+}

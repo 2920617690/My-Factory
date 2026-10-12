@@ -1,0 +1,49 @@
+{
+  "schema_version": "mf.execution.v1",
+  "task_id": "TASK-EQ-001",
+  "execution_id": "EXEC-EQ-001",
+  "target": {
+    "entity_id": "EQ-001",
+    "entity_type": "equipment"
+  },
+  "status": "COMPLETED",
+  "output": {
+    "entity_id": "EQ-001",
+    "data_mode": "mock",
+    "state_domain": "live",
+    "floor": 1,
+    "status": "idle",
+    "requires_attention": false,
+    "state_effects": []
+  },
+  "state_effects": [],
+  "trace": [
+    {
+      "trace_id": "TRACE-f0c4871ddbb749ec9a7f33d229550396",
+      "task_id": "TASK-EQ-001",
+      "execution_id": "EXEC-EQ-001",
+      "entity_id": "EQ-001",
+      "capability": {
+        "capability_id": "equipment.inspect",
+        "version": "1.0.0"
+      },
+      "plugin_id": "mf.equipment.mock",
+      "plugin_version": "0.1.0",
+      "start": "2026-10-12T09:40:05.317999Z",
+      "end": "2026-10-12T09:40:05.318037Z",
+      "status": "COMPLETED",
+      "result": {
+        "entity_id": "EQ-001",
+        "data_mode": "mock",
+        "state_domain": "live",
+        "floor": 1,
+        "status": "idle",
+        "requires_attention": false,
+        "state_effects": []
+      },
+      "error": null,
+      "attributes": {}
+    }
+  ],
+  "error": null
+}

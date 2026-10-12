@@ -1,0 +1,12 @@
+{
+  "name": "@my-factory/factory-demo-tools",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "exports": "./src/index.mjs",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "0.1.5-rc.1",
+    "@deepseek-ai/dsh-tools": "0.1.5-rc.1"
+  }
+}

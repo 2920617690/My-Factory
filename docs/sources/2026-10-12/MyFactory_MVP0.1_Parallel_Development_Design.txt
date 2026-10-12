@@ -1,0 +1,701 @@
+My Factory MVP 0.1
+
+三并行开发总体设计、接口 Contract 与执行汇总
+
+Frontend / Platform Core / Harness Runtime & Plugin
+
+文档用途：作为三名开发人员或三个 Codex/Work 实例的共同上位设计文档。本文件基于已完成的三项 POC 展开，不重新证明基础技术可行性，而是规定三条开发线如何独立工程化、如何保持接口稳定、如何通过 Contract 和 Mock 实现真正并行，以及最终如何完成系统融合。
+
+0. 当前阶段与文档体系
+
+当前已经完成数据中台、Harness 工厂大脑、数字孪生与仿真三个独立 POC，并完成 Phase 0 架构设计。因此现在进入的是 Phase 1：把三个独立技术验证结果转化为一个可以持续开发和融合的 My Factory MVP。
+
+层级 | 文档作用 | 当前对应内容
+
+Level 1：共享规范 | 定义三方边界、融合方向、共同验收 | 共享集成规范 + 三重点工作目标验收
+
+Level 2：总体设计 | 定义每个 Track 内部架构和三方 Contract | 本文件主体
+
+Level 3：执行任务书 | 告诉 Codex 具体怎么做、怎么测试、怎么交付 | 已有 Frontend / Platform / Runtime 三份任务书
+
+三个人实际开发时，每个人都应同时持有：共享规范 + 本总体设计 + 自己的独立开发任务书。
+
+1. 总体目标
+
+My Factory MVP 0.1 的第一阶段目标，是构建一个由 Factory State 驱动、可通过 Task/Plugin 执行管理能力、并能把执行结果实时反馈到数字孪生界面的可运行工厂系统。
+
+用户
+ ↓
+Digital Twin Frontend
+ ↓
+Application API
+ ↓
+Task Runtime
+ ↓
+Runtime Adapter
+ ↓
+Harness / Plugin Runtime
+ ↓
+Factory Plugin
+ ↓
+Execution Result
+ ↓
+Factory State / Event
+ ↓
+WebSocket
+ ↓
+Digital Twin Update
+
+
+2. 三个并行工作的职责划分
+
+Track | 一句话职责 | 核心产物 | 不能承担
+
+A Frontend / Digital Twin | 负责“看和操作” | 数字工厂、对象交互、Context Panel、Task/Event/Execution UI、Frontend Adapter | 数据库、Harness、业务规则、Factory State 权威
+
+B Platform Core | 负责“状态和流程” | Application API、Factory State、Task Runtime、Event Runtime、WebSocket、PostgreSQL | 3D、LLM、插件算法
+
+C Harness Runtime / Plugin | 负责“能力和执行” | Harness Adapter、Plugin Registry、Capability、Data Contract Plugin、Factory Plugins、Execution Trace | 前端、Factory State 持久化、WebSocket
+
+B 位于 A 与 C 之间，是融合主干；但公共接口不得由 B 单方面定义，三方按本文件共同遵守。
+
+3. 三方共享的硬性架构边界
+
+依赖方向固定为 Frontend → Platform → Runtime → Plugin；状态反馈反向返回。
+
+Frontend 不直接访问数据库，不直接调用 Harness，不依赖具体 Plugin 名称。
+
+Harness 不拥有 My Factory Task 生命周期；Task 生命周期由 Platform 维护。
+
+Plugin 不直接控制 UI，不直接向 WebSocket 推送，不直接更新 Platform PostgreSQL 业务状态。
+
+Factory State 是 My Factory 当前统一状态视图；真实 ERP/WMS 接入后，源系统仍保持各自权威边界。
+
+WebSocket 是变化通知通道，不是权威状态存储。
+
+Data Contract 是一个基础插件能力，不等价于强迫所有模块共享同一内部 Schema。
+
+Simulation State 与 Live Factory State 必须分离。
+
+4. 共享接口与 Contract 设计基线
+
+本阶段不冻结完整 Equipment/Inventory/Order 业务 Schema，但必须冻结系统之间的稳定“信封”和引用语义。内部模型可以各自演化，跨边界通信必须遵循以下核心 Contract。
+
+4.1 稳定核心 Contract
+
+Contract | 必须表达 | 说明
+
+EntityRef | entity_id, entity_type | 跨系统引用同一工厂对象；不携带完整实体数据
+
+TaskRef | task_id, status | 跨系统追踪用户动作对应的任务
+
+ExecutionRef | execution_id, task_id | 追踪一次 Runtime/Plugin 执行
+
+CapabilityRef | capability_id/name, version | 上层依赖能力语义，不依赖具体 Plugin 名称
+
+EventEnvelope | event_id, event_type, timestamp, source, refs, payload, version | 变化事实的统一外壳
+
+ErrorEnvelope | error_code, category, message, refs, details | 屏蔽 Python traceback/Harness 内部异常
+
+ContractMeta | contract_id, version, source, generated_at/observed_at | Data Contract Plugin 的版本和来源元数据
+
+4.2 Frontend ↔ Platform Contract
+
+通信方式：REST + WebSocket。Frontend 只能面对 Application API。
+
+REST:
+- Entity Query
+- State Query
+- Action Submit
+- Task Query
+- Event Query
+
+Realtime:
+- WebSocket Event Notification
+
+
+Frontend 组件不得理解 PostgreSQL 表结构。
+
+Frontend 不解析 Harness / Plugin 内部返回格式。
+
+前端收到事件后优先 invalidate/re-fetch 对应 Query；不要仅靠事件 payload 永久维护业务状态。
+
+所有 API 统一 /api/v1/ 前缀。
+
+4.3 Platform ↔ Runtime Contract
+
+这是三方融合中最关键的边界。Platform 通过 RuntimeClient/Adapter 调用 Runtime。
+
+ExecutionRequest
+  task_id
+  execution_id
+  capability
+  target: EntityRef
+  context
+  parameters
+  policy
+
+ExecutionResult
+  execution_id
+  status
+  output
+  state_effects?
+  trace
+  error?
+
+
+context 和 parameters 的业务内部结构暂不冻结，由 Data Contract Plugin 逐步管理。
+
+Platform 不依赖 DeepSeek Harness SDK、profile、Cordis 或具体插件文件结构。
+
+Runtime 不接收浏览器 HTTP Request；只接收 ExecutionRequest。
+
+Runtime 返回执行结果，状态变更由 Platform 校验后落入 Factory State。
+
+4.4 Runtime ↔ Plugin Contract
+
+Plugin lifecycle:
+Register
+Discover
+Invoke
+Result
+Error
+
+PluginManifest:
+plugin_id
+version
+capabilities[]
+runtime requirements
+license metadata
+
+
+Capability 与 Plugin 必须分离。例如上层只依赖 inventory.analyze；实际可以由 mock-inventory-plugin、inventory-v2-plugin 或未来 WMS 插件实现。
+
+4.5 Event Contract
+
+EventEnvelope
+  event_id
+  event_type
+  timestamp_utc
+  source
+  entity_id?
+  task_id?
+  execution_id?
+  payload
+  schema_version
+
+
+第一阶段可使用的事件语义包括 task.created / started / completed / failed、plugin.started / completed / failed、inventory.changed、equipment.state.changed。
+
+4.6 Error Contract
+
+错误类别 | 用途 | Frontend 应看到
+
+VALIDATION | 参数/Contract 校验失败 | 可理解的字段错误
+
+NOT_FOUND | Entity/Task/Capability 不存在 | 业务对象不存在
+
+PERMISSION | 权限拒绝 | 禁止操作提示
+
+PLUGIN_ERROR | 插件执行失败 | 任务失败及可重试信息
+
+RUNTIME_ERROR | Harness/Runtime 层失败 | 统一运行错误，不暴露内部栈
+
+INTERNAL | Platform 内部异常 | trace_id + 通用错误信息
+
+4.7 Data Contract Plugin
+
+Data Contract Plugin 当前冻结的是机制，不是完整业务字段。
+
+register(contract)
+validate(contract_id, payload)
+transform(source_contract, target_contract, payload)
+resolve_version(contract_id, requested_version)
+
+
+External Adapter → Platform 之前可通过 Data Contract 做源系统转换。
+
+Plugin A → Plugin B 的跨契约数据可通过 Data Contract 转换。
+
+Frontend 原则上不直接调用 Data Contract Plugin，而由 Platform/Frontend Adapter 消化适配结果。
+
+没有匹配 Contract、版本冲突、转换失败时必须结构化失败。
+
+5. Track A：Frontend / Digital Twin 总体设计
+
+该 Track 以已经完成的 React Three Fiber + Three.js 数字孪生 POC 为起点，不重新验证 R3F 可行性。目标是把 POC 工程化为 My Factory 的统一交互入口。
+
+React UI
+  ↓
+ViewModel / Hooks
+  ↓
+FactoryClient / Frontend Adapter
+  ↓
+REST + WebSocket
+  ↓
+Platform
+
+
+内部模块 | 职责
+
+Digital Factory Workspace | 整个工厂工作台布局与导航
+
+Twin Scene | 楼层、区域、设备、仓库、工位、AGV 场景
+
+Entity Layer | 选择、高亮、定位、统一 entity_id 绑定
+
+Context Panel | 当前对象详情、关系、任务、Actions
+
+Action System | 把用户意图转换成 Platform Action Submit
+
+Task/Event Center | 展示任务状态和事件
+
+Execution Trace UI | 展示 Runtime/Plugin Trace；React Flow 仅负责展示
+
+FactoryClient | 唯一后端访问入口
+
+Frontend Adapter/ViewModel | 把 Platform 返回转换成适合 UI/R3F 使用的模型
+
+MSW Mock | 在 Platform 未完成时独立开发
+
+5.1 前端状态边界
+
+技术 | 负责 | 禁止
+
+Zustand | selectedEntityId、floor、camera、activePanel 等 UI 状态 | 保存完整 Factory State
+
+TanStack Query | Entity/State/Task 等服务端状态 | 存纯 UI 状态
+
+WebSocket | 通知变化并触发 query invalidation | 成为唯一状态源
+
+R3F | 渲染 ViewModel | 直接 fetch/axios/raw WebSocket
+
+5.2 Frontend 独立制作方式
+
+Frontend
+  ↓
+FactoryClient
+  ↓
+MSW Mock Platform API
+
+独立演示：
+打开工厂
+→ 点 WH-001
+→ inventory.analyze
+→ Task RUNNING
+→ Task COMPLETED
+→ 展示结果
+
+
+融合时只把 MSW 换成真实 Platform API；如果需要重写页面业务逻辑，则前端设计验收失败。
+
+6. Track B：Platform Core 总体设计
+
+该 Track 以已经完成的 FastAPI + PostgreSQL + Mock Adapter + Factory State POC 为起点。目标是从“统一数据查询 POC”升级为系统真正的状态和流程中枢。
+
+Frontend
+  ↓
+Application API
+  ↓
+┌──────────────┬───────────────┐
+│ Factory State│ Task Runtime  │
+└──────────────┴──────┬────────┘
+                      ↓
+                RuntimeClient
+                      ↓
+                    Runtime
+
+Event Runtime
+  ↓
+WebSocket Gateway
+  ↓
+Frontend
+
+
+模块 | 职责
+
+Application API | Frontend 唯一业务入口
+
+Factory State Service | 维护当前实体、状态、关系的统一视图
+
+Persistence | PostgreSQL 持久化实现
+
+Task Runtime | Task 状态机、幂等、执行关联
+
+RuntimeClient | 隔离 Platform 与 DeepSeek Harness
+
+Event Runtime | 记录与传播已经发生的事实
+
+WebSocket Gateway | 把事件通知前端
+
+Audit/Trace | task_id/execution_id/entity_id 跨层追踪
+
+External Adapter Boundary | 未来 ERP/WMS/设备接入
+
+6.1 Factory State 生命周期
+
+ERP / WMS / Device / Mock
+      ↓
+Adapter
+      ↓
+Data Contract validation/transform
+      ↓
+Platform Service
+      ↓
+Factory State
+      ↓
+REST / Query
+
+
+PostgreSQL 是持久化实现，不等同于 Factory State 领域本身；不得让上层依赖表结构。
+
+6.2 Task 生命周期
+
+CREATED
+  ↓
+QUEUED
+  ↓
+RUNNING
+  ↓
+COMPLETED
+  └→ FAILED
+
+预留：WAITING_APPROVAL / CANCELLED / INTERRUPTED
+
+
+Harness 只执行 ExecutionRequest，不拥有该状态机。
+
+6.3 Platform 独立制作方式
+
+curl / pytest
+  ↓
+Application API
+  ↓
+Task Runtime
+  ↓
+MockRuntimeClient
+  ↓
+ExecutionResult
+  ↓
+Task completed
+  ↓
+Event + WebSocket
+
+
+融合时只把 MockRuntimeClient 换成真实 HarnessRuntimeClient。Task Runtime 和 API 不应大改。
+
+7. Track C：Harness Runtime / Plugin 总体设计
+
+该 Track 以已经完成的官方 DeepSeek Harness + Factory Tool POC 为起点。不重复证明 SDK 能否运行，而是把 POC 提炼成稳定的 Runtime/Plugin 子系统。
+
+Platform ExecutionRequest
+        ↓
+MyFactory Harness Adapter
+        ↓
+Capability / Plugin Registry
+        ↓
+Deterministic Plugin OR Factory Brain
+        ↓
+Plugin Invocation
+        ↓
+ExecutionResult + Trace
+        ↓
+Platform
+
+
+模块 | 职责
+
+Harness Adapter | 隔离 DeepSeek Harness SDK/profile/JSON-RPC 实现
+
+Capability Registry | 对外稳定能力语义
+
+Plugin Registry | 插件注册、发现、版本、生命周期
+
+Execution Engine | 统一执行 deterministic / brain 路径
+
+Execution Trace | 结构化工具调用轨迹
+
+Data Contract Plugin | register/validate/transform/version
+
+Factory Plugins | Inventory、Equipment 等工业能力
+
+Sandbox Boundary | 未来生成代码的受限执行边界
+
+7.1 Deterministic 与 Factory Brain 分流
+
+确定性能力：
+ExecutionRequest
+→ Capability
+→ Plugin
+→ Result
+
+需要推理/组合：
+ExecutionRequest
+→ Harness / Factory Brain
+→ Capability composition
+→ Plugins
+→ Result
+
+
+两条路径必须输出统一 ExecutionResult，避免 Platform 感知内部执行方式。
+
+7.2 Runtime 独立制作方式
+
+Fixture ExecutionRequest
+  ↓
+Runtime Adapter
+  ↓
+Registry
+  ↓
+inventory.analyze
+  ↓
+Inventory Mock Plugin
+  ↓
+ExecutionResult
+  ↓
+Trace
+
+
+融合时只把 Fixture 输入替换为 Platform 真实 ExecutionRequest，不重写 Plugin/Registry。
+
+8. 三方 Mock 策略：并行开发的关键
+
+Track | 自己 Mock 什么 | 独立验收 | 融合时替换
+
+Frontend | MSW 模拟 Platform REST/WebSocket | 完整数字孪生交互和 Task UI | MSW → Real Platform
+
+Platform | MockRuntimeClient | Action→Task→Result→Event→WebSocket | MockRuntimeClient → Runtime
+
+Runtime | Factory/Inventory/Equipment Fixtures | ExecutionRequest→Plugin→Result→Trace | Fixture → Platform ExecutionRequest
+
+任何一条线都不得以“另一个 Track 还没完成”为阻塞理由。
+
+9. 三方共享 ID 与追踪规则
+
+对象 | 共享 Demo ID
+
+Factory | FACTORY-001
+
+Equipment | EQ-001, EQ-002
+
+Warehouse | WH-001
+
+Workstation | WS-001, WS-002
+
+AGV | AGV-001, AGV-002
+
+Material | MAT-001
+
+Order | ORD-001
+
+跨系统动态 ID 至少统一：task_id、execution_id、event_id、plugin_id。禁止把数据库自增 ID 作为跨系统唯一标识。
+
+10. 开源复用 Gate（所有 Track 强制执行）
+
+每个通用能力开始自研之前，都必须先执行：
+
+Requirement
+→ Open-source Search
+→ License Review
+→ Maturity / Activity
+→ Integration Cost
+→ ADOPT / REFERENCE / REJECT
+→ Pin Version / Commit
+→ Implement
+
+
+领域 | 优先复用方向
+
+Frontend 基线 | Full Stack FastAPI Template 前端、React/Vite/TanStack Query
+
+3D | Three.js + React Three Fiber + Drei
+
+Mock | MSW
+
+流程展示 | React Flow
+
+Platform | FastAPI + PostgreSQL + 模板现有 ORM/迁移/认证
+
+Schema | Pydantic / JSON Schema
+
+Runtime | DeepSeek Harness，通过 Adapter 隔离
+
+Simulation | SimPy，后续阶段接入
+
+Event Bus | NATS：Later Evaluate，不在 MVP 初期引入
+
+Durable Workflow | Temporal：Later Evaluate，不在 MVP 初期引入
+
+优先许可证：MIT、Apache-2.0、BSD、PostgreSQL License。AGPL、商业闭源核心、许可证不明确的项目不得默认进入核心依赖。
+
+11. 第一次三方 Integration Gate
+
+三条 Track 各自独立 PASS 后，第一次联合只验证一个最小业务：WH-001 库存分析。
+
+Frontend:
+选择 WH-001
+→ 点击 inventory.analyze
+
+Platform:
+创建 Task
+→ RuntimeClient.execute
+
+Runtime:
+发现 inventory.analyze
+→ Inventory Plugin
+→ ExecutionResult
+
+Platform:
+Task COMPLETED
+→ Event
+
+Frontend:
+收到 Event
+→ 查询 Task/Result
+→ 展示分析结果
+
+
+Frontend 不修改页面业务逻辑，只关闭 MSW/切换 endpoint。
+
+Platform 只把 MockRuntimeClient 换成真实 RuntimeClient。
+
+Runtime 只把 Fixture 输入换成真实 ExecutionRequest。
+
+task_id / execution_id 能贯穿全部日志和 Trace。
+
+如果融合要求大规模重构任意 Track，Integration Gate 判 FAIL。
+
+12. 第二次 Integration Gate：状态变化闭环
+
+Plugin Result
+  ↓
+Platform Validation
+  ↓
+Factory State Change
+  ↓
+inventory.changed
+  ↓
+WebSocket
+  ↓
+Frontend Query Invalidation
+  ↓
+Digital Twin / Context Panel Update
+
+
+这一 Gate 才证明“插件执行能够改变数字工厂”。Plugin 仍不得直接写 Platform DB。
+
+13. 第三次 Integration Gate：Simulation
+
+仿真稍后接入，不阻塞第一次系统融合。
+
+Action / Brain
+  ↓
+simulation.run capability
+  ↓
+Simulation Plugin
+  ↓
+SimPy Simulation Service
+  ↓
+Simulation State / Metrics
+  ↓
+Result
+  ↓
+Frontend Visualization
+
+
+Simulation State 与 Live Factory State 永远分离；仿真实验不得直接覆盖真实状态。
+
+14. 三个人的实际工作包
+
+人员 | 必须阅读 | 独立工作包 | 融合责任
+
+A Frontend | 本文件 + Frontend 任务书 | Digital Factory Workspace、FactoryClient、MSW、E2E | MSW 可无痛替换真实 Platform
+
+B Platform | 本文件 + Platform 任务书 | Factory State、Task/Event、RuntimeClient、WebSocket | 连接 A 与 C，MockRuntime 可无痛替换
+
+C Runtime | 本文件 + Runtime 任务书 | Harness Adapter、Registry、Data Contract、Plugins、Trace | Fixture 可无痛替换 Platform ExecutionRequest
+
+15. 各 Track Done Definition
+
+Track | 独立 PASS 条件
+
+Frontend | 无 Platform/Runtime 也能通过 MSW 完整演示 Twin→Action→Task→Result；关闭 Mock 后接口切换点唯一
+
+Platform | 无 Frontend/真实 Runtime 也能通过 API + MockRuntime 完成 Task/Event/WebSocket 闭环
+
+Runtime | 无 Frontend/Platform 也能通过 Fixture 完成 capability discovery→plugin invoke→result→trace
+
+16. 代码与仓库组织原则
+
+MVP 阶段优先单一主仓库，避免三套孤立仓库增加联调成本。
+
+沿用成熟模板实际目录，不为符合图纸机械重构。
+
+建议保持 frontend/web、backend/platform、runtime/plugins、simulation、docs 等清晰边界。
+
+共享代码只放真正稳定、跨 Track 的引用类型/SDK；shared 不得成为杂物目录。
+
+所有接口改动必须更新 Contract 文档和对应 Mock。
+
+17. 推荐开发顺序
+
+三方同时审计各自 POC，提取可复用代码并完成开源复用 Gate。
+
+Frontend 建立 MSW 驱动的 Digital Factory Workspace。
+
+Platform 建立 Factory State + Task/Event + MockRuntime 闭环。
+
+Runtime 建立 Harness Adapter + Registry + Data Contract + Mock Plugins。
+
+三个 Track 分别达到独立 PASS。
+
+执行第一次 Integration Gate：WH-001 inventory.analyze。
+
+执行第二次 Gate：Factory State change → Event → Twin update。
+
+之后再接 Simulation、真实 ERP/WMS 和专业算法。
+
+18. 当前阶段明确不做
+
+真实 ERP/WMS 接入。
+
+正式生产排产/库存优化/AGV 算法。
+
+CAD/BIM 高精度资产。
+
+复杂微服务拆分、Kubernetes。
+
+NATS/Temporal 的提前引入。
+
+完整 Data Contract 业务 Schema 冻结。
+
+生产级代码沙箱。
+
+把仿真和真实 Factory State 混合。
+
+19. 交付与变更管理
+
+每个 Track 的 Handoff Report 至少包含：
+
+已复用的 POC 代码与上游开源依赖、锁定版本/commit。
+
+当前 Mock 假设和真实替换位置。
+
+对其他 Track 暴露的接口。
+
+自动测试与实际运行结果。
+
+未解决问题按 BLOCKER / NEXT GATE / LATER 分类。
+
+任何偏离本文件的设计必须记录 Decision Log，并说明对另外两方的兼容性影响。
+
+20. 最终判定标准
+
+本阶段设计成功的核心判据不是三个人各自写了多少代码，而是：三个模块分别能够独立运行，且在把 Mock 换成真实相邻模块时不需要重写内部业务逻辑。
+
+Frontend: MSW → Platform
+Platform: MockRuntimeClient → Runtime
+Runtime: Fixture → Platform ExecutionRequest
+
+三次替换都只发生在预先设计的 integration seam，
+则三并行开发方案成立。

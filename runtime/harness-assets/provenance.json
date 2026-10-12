@@ -1,0 +1,36 @@
+{
+  "origin": "Foundation/pocs/my-factory-harness-poc/demo",
+  "package_version": "0.3.0",
+  "files": [
+    {
+      "path": "guest_run.py",
+      "sha256": "51924a1d650cd82324bbefdafb32731e43b347dffa6f50f51f728c69d6d8a487",
+      "copied_unchanged": true
+    },
+    {
+      "path": "factory-tools/package.json",
+      "sha256": "e01934dc6acb32548f29604255525bb974fd55e14a0555532a4d84557f699014",
+      "copied_unchanged": true
+    },
+    {
+      "path": "factory-tools/LICENSE",
+      "sha256": "10854ea5653089cf4422a457265b02a34e23cac7a6dd4dae7c74956e2e8d39c4",
+      "copied_unchanged": true
+    },
+    {
+      "path": "factory-tools/src/index.mjs",
+      "sha256": "e7802cf981c2c36b9a7a24b5b031d35d5dd31c5e7c0dfe6b0ea64e5e51b69fd8",
+      "copied_unchanged": true
+    },
+    {
+      "path": "factory-tools/src/business.mjs",
+      "sha256": "bc12edd6e0e65fad3014368014fa3b568bc9f9876d760b9628e94025709ea175",
+      "copied_unchanged": true
+    },
+    {
+      "path": "fixtures/factory.json",
+      "sha256": "f86cf24391997655c70f4405a1335ea0d6cf346422f2b3f2749e7428a30f0290",
+      "copied_unchanged": true
+    }
+  ]
+}

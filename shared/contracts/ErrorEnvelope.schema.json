@@ -1,0 +1,92 @@
+{
+  "$defs": {
+    "References": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "execution_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Execution Id",
+          "type": "string"
+        },
+        "entity_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Id"
+        },
+        "trace_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trace Id"
+        }
+      },
+      "required": [
+        "task_id",
+        "execution_id"
+      ],
+      "title": "References",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "error_code": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Error Code",
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "VALIDATION",
+        "NOT_FOUND",
+        "PERMISSION",
+        "PLUGIN_ERROR",
+        "RUNTIME_ERROR",
+        "INTERNAL"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "message": {
+      "title": "Message",
+      "type": "string"
+    },
+    "refs": {
+      "$ref": "#/$defs/References"
+    },
+    "details": {
+      "additionalProperties": true,
+      "title": "Details",
+      "type": "object"
+    }
+  },
+  "required": [
+    "error_code",
+    "category",
+    "message",
+    "refs"
+  ],
+  "title": "ErrorEnvelope",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "metadata": {
+      "contract_id": "mf.mock.factory-context",
+      "version": "0.1.0",
+      "source": "myfactory-runtime/mock-fixture",
+      "generated_at": "2026-10-12T00:00:00Z"
+    },
+    "schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "warehouse_id",
+        "material_id",
+        "order_id",
+        "state_domain"
+      ],
+      "properties": {
+        "state": {
+          "type": "object",
+          "required": [
+            "factory_id",
+            "data_mode",
+            "snapshot_id",
+            "materials",
+            "lots",
+            "orders",
+            "locations",
+            "inbound"
+          ],
+          "properties": {
+            "factory_id": {
+              "const": "FACTORY-001"
+            },
+            "data_mode": {
+              "const": "mock"
+            },
+            "snapshot_id": {
+              "type": "string"
+            }
+          }
+        },
+        "warehouse_id": {
+          "const": "WH-001"
+        },
+        "material_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "order_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state_domain": {
+          "enum": [
+            "live",
+            "simulation"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "metadata": {
+      "contract_id": "mf.mock.factory-context",
+      "version": "1.0.0",
+      "source": "myfactory-runtime/mock-fixture",
+      "generated_at": "2026-10-12T00:00:00Z"
+    },
+    "schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "factory_state",
+        "warehouse_id",
+        "material_id",
+        "order_id",
+        "state_domain"
+      ],
+      "properties": {
+        "factory_state": {
+          "type": "object",
+          "required": [
+            "factory_id",
+            "data_mode",
+            "snapshot_id",
+            "materials",
+            "lots",
+            "orders",
+            "locations",
+            "inbound"
+          ],
+          "properties": {
+            "factory_id": {
+              "const": "FACTORY-001"
+            },
+            "data_mode": {
+              "const": "mock"
+            },
+            "snapshot_id": {
+              "type": "string"
+            }
+          }
+        },
+        "warehouse_id": {
+          "const": "WH-001"
+        },
+        "material_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "order_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state_domain": {
+          "enum": [
+            "live",
+            "simulation"
+          ]
+        }
+      }
+    }
+  }
+]

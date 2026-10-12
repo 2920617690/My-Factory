@@ -1,0 +1,8 @@
+{
+  "source": "Foundation/pocs/my-factory-harness-poc/demo/factory-tools/src/business.mjs",
+  "source_sha256": "bc12edd6e0e65fad3014368014fa3b568bc9f9876d760b9628e94025709ea175",
+  "copied_unchanged": true,
+  "license": "MIT",
+  "tool_package_version": "0.3.0",
+  "fixture_sha256": "f86cf24391997655c70f4405a1335ea0d6cf346422f2b3f2749e7428a30f0290"
+}

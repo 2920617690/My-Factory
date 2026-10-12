@@ -1,0 +1,23 @@
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/node_modules/
+.env
+.env.*
+*.log
+runtime/state/
+runtime/config/runtime.local.json
+**/*.local.json
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+.DS_Store
+**/.pytest_cache/
+**/.ruff_cache/
+**/*.egg-info/
+# Machine provenance and full session archives remain available locally.
+docs/sources/**/manifest.json
+runtime/evidence/raw/
+runtime/evidence/source-manifest.json
+runtime/evidence/package-checks.json
+runtime/evidence/git-publication.json

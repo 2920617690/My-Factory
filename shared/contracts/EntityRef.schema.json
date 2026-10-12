@@ -1,0 +1,22 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "entity_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Entity Id",
+      "type": "string"
+    },
+    "entity_type": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Entity Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "entity_id",
+    "entity_type"
+  ],
+  "title": "EntityRef",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,8 @@
+{
+  "node_binary": null,
+  "harness": {
+    "enabled": false,
+    "sdk_version": "0.1.5rc1",
+    "commit": "183f08e9c6dde7e36cd2318eaee70b0da08fb35e"
+  }
+}

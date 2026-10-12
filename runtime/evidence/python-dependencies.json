@@ -1,0 +1,114 @@
+[
+  {
+    "name": "annotated-doc",
+    "version": "0.0.5",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "annotated-types",
+    "version": "0.8.0",
+    "license": "MIT",
+    "classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ]
+  },
+  {
+    "name": "anyio",
+    "version": "4.15.1",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "attrs",
+    "version": "26.1.0",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "click",
+    "version": "8.5.0",
+    "license": "BSD-3-Clause",
+    "classifiers": []
+  },
+  {
+    "name": "fastapi",
+    "version": "0.141.1",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "h11",
+    "version": "0.16.0",
+    "license": "MIT",
+    "classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ]
+  },
+  {
+    "name": "idna",
+    "version": "3.20",
+    "license": "BSD-3-Clause",
+    "classifiers": []
+  },
+  {
+    "name": "jsonschema",
+    "version": "4.26.0",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "jsonschema-specifications",
+    "version": "2025.9.1",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "pydantic",
+    "version": "2.13.5",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "pydantic_core",
+    "version": "2.46.5",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "referencing",
+    "version": "0.37.0",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "rpds-py",
+    "version": "2026.9.1",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "starlette",
+    "version": "1.7.0",
+    "license": "BSD-3-Clause",
+    "classifiers": []
+  },
+  {
+    "name": "typing-inspection",
+    "version": "0.4.4",
+    "license": "MIT",
+    "classifiers": []
+  },
+  {
+    "name": "typing_extensions",
+    "version": "4.16.0",
+    "license": "PSF-2.0",
+    "classifiers": []
+  },
+  {
+    "name": "uvicorn",
+    "version": "0.54.0",
+    "license": "BSD-3-Clause",
+    "classifiers": []
+  }
+]

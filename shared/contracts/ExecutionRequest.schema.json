@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "CapabilityRef": {
+      "additionalProperties": false,
+      "properties": {
+        "capability_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Capability Id",
+          "type": "string"
+        },
+        "version": {
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "capability_id",
+        "version"
+      ],
+      "title": "CapabilityRef",
+      "type": "object"
+    },
+    "EntityRef": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "entity_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Entity Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "entity_type"
+      ],
+      "title": "EntityRef",
+      "type": "object"
+    },
+    "ExecutionPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "default": "deterministic",
+          "enum": [
+            "deterministic",
+            "brain"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "read_only": {
+          "default": true,
+          "title": "Read Only",
+          "type": "boolean"
+        },
+        "timeout_seconds": {
+          "default": 180,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        }
+      },
+      "title": "ExecutionPolicy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "mf.execution.v1",
+      "default": "mf.execution.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "task_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "execution_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Execution Id",
+      "type": "string"
+    },
+    "capability": {
+      "$ref": "#/$defs/CapabilityRef"
+    },
+    "target": {
+      "$ref": "#/$defs/EntityRef"
+    },
+    "context": {
+      "additionalProperties": true,
+      "title": "Context",
+      "type": "object"
+    },
+    "parameters": {
+      "additionalProperties": true,
+      "title": "Parameters",
+      "type": "object"
+    },
+    "policy": {
+      "$ref": "#/$defs/ExecutionPolicy"
+    }
+  },
+  "required": [
+    "task_id",
+    "execution_id",
+    "capability",
+    "target",
+    "context"
+  ],
+  "title": "ExecutionRequest",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
