@@ -1,0 +1,7 @@
+{
+  "schema_version": "foundation.adapters.v1",
+  "factory_state": {"mode": "mock_seed", "a_service_url": null},
+  "brain": {"url": "http://127.0.0.1:18340", "provider": "official_harness"},
+  "simulation": {"c_service_url": null, "enabled": false},
+  "production_writes": false
+}

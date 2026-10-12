@@ -7,12 +7,14 @@ on:
       - 'runtime/**'
       - 'shared/**'
       - 'tests/integration/**'
+      - 'demos/foundation-workbench/**'
       - '.github/workflows/runtime-checks.yml'
   pull_request:
     paths:
       - 'runtime/**'
       - 'shared/**'
       - 'tests/integration/**'
+      - 'demos/foundation-workbench/**'
       - '.github/workflows/runtime-checks.yml'
   workflow_dispatch:
 
@@ -40,3 +42,51 @@ jobs:
       - name: Verify independent Runtime without model calls
         working-directory: runtime
         run: .venv/bin/python scripts/verify_runtime.py
+
+  workbench-runtime-demo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24.19.0'
+      - name: Prepare pinned workbench dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -r runtime/requirements.lock -r demos/foundation-workbench/requirements.lock
+          .venv/bin/python -m pip check
+          npm install --global pnpm@11.25.0
+      - name: Build the Runtime showcase page
+        working-directory: demos/foundation-workbench/ui
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build
+      - name: Check gateway and source boundaries
+        run: PYTHONPATH=demos/foundation-workbench .venv/bin/python -m unittest discover -s demos/foundation-workbench/tests -v
+      - name: Verify live workbench to Runtime relay without model calls
+        run: |
+          .venv/bin/python runtime/start.py > runtime-service.log 2>&1 &
+          runtime_pid=$!
+          .venv/bin/python demos/foundation-workbench/start.py > workbench-service.log 2>&1 &
+          workbench_pid=$!
+          trap 'kill "$runtime_pid" "$workbench_pid" 2>/dev/null || true' EXIT
+          .venv/bin/python - <<'PY'
+          import json, time, urllib.request
+          for port, path in [(18342, '/api/v1/health'), (18341, '/api/v1/runtime/capabilities')]:
+              for attempt in range(60):
+                  try:
+                      with urllib.request.urlopen(f'http://127.0.0.1:{port}{path}', timeout=2) as response:
+                          body = json.load(response)
+                      if port == 18341 and not body.get('connected'):
+                          raise RuntimeError('Runtime not connected yet')
+                      break
+                  except Exception:
+                      time.sleep(0.25)
+              else:
+                  raise RuntimeError(f'Local service {port} did not become ready')
+          PY
+          .venv/bin/python demos/foundation-workbench/tests/check_runtime_demo_http.py

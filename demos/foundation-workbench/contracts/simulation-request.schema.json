@@ -1,0 +1,24 @@
+{
+  "additionalProperties": false,
+  "description": "C creates its own run; business inventory is never an output destination.",
+  "properties": {
+    "scenario_id": {
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "strategy": {
+      "enum": [
+        "baseline",
+        "replenish"
+      ],
+      "title": "Strategy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scenario_id",
+    "strategy"
+  ],
+  "title": "SimulationRequest",
+  "type": "object"
+}

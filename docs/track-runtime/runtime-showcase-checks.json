@@ -1,0 +1,350 @@
+{
+  "scope": "temporary Runtime showcase; not formal Frontend/Platform delivery or complete joint Gate",
+  "checked_on": "2026-10-12",
+  "status": "PASS",
+  "backend_tests": 19,
+  "frontend_typecheck": "PASS",
+  "frontend_build": "PASS",
+  "actual_http_checks": [
+    {
+      "check": "actual independent Runtime capability discovery",
+      "status": "PASS"
+    },
+    {
+      "check": "inventory real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "inventory baseline 6 / 10 / 4",
+      "status": "PASS"
+    },
+    {
+      "check": "order_group real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "contended actual shortage",
+      "status": "PASS"
+    },
+    {
+      "check": "order_group real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "partial_receipt actual shortage",
+      "status": "PASS"
+    },
+    {
+      "check": "order_group real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "quality_release actual shortage",
+      "status": "PASS"
+    },
+    {
+      "check": "order_group real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "group_replenished actual shortage",
+      "status": "PASS"
+    },
+    {
+      "check": "order_group real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "lift_blocked actual shortage",
+      "status": "PASS"
+    },
+    {
+      "check": "enough inventory still blocked across floors",
+      "status": "PASS"
+    },
+    {
+      "check": "equipment real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "actual equipment maintenance",
+      "status": "PASS"
+    },
+    {
+      "check": "equipment real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "actual equipment idle",
+      "status": "PASS"
+    },
+    {
+      "check": "legacy_contract real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "real old-context contract transformation",
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_contract real relay response",
+      "status": "PASS"
+    },
+    {
+      "check": "unknown contract version is a retained actual failure",
+      "status": "PASS"
+    },
+    {
+      "check": "query returns exactly the executed result",
+      "status": "PASS"
+    },
+    {
+      "check": "HTTP download preserves the exact input and returned result",
+      "status": "PASS"
+    },
+    {
+      "check": "all executions are read only, unique, and have no effects",
+      "status": "PASS"
+    },
+    {
+      "check": "untrusted browser origin rejected",
+      "status": "PASS"
+    },
+    {
+      "check": "external destination injection rejected",
+      "status": "PASS"
+    },
+    {
+      "check": "non-inventory model path rejected before model call",
+      "status": "PASS"
+    }
+  ],
+  "http_passed": 28,
+  "actual_http_executions": [
+    {
+      "demo": {
+        "demo": "inventory",
+        "snapshot_id": "morning",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-49e9be31423847509de189c9feaff55a",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": null,
+      "capabilities": [
+        "inventory.analyze",
+        "data_contract.transform"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "order_group",
+        "snapshot_id": "contended",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-e5d1a66cc638457490681c10bbdbf910",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": {
+        "available": 120,
+        "demand": 180,
+        "shortage": 60,
+        "transfer_blocked": false
+      },
+      "capabilities": [
+        "inventory.analyze",
+        "data_contract.transform"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "order_group",
+        "snapshot_id": "partial_receipt",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-6ac841004b6b4747beda0eb7957bc7dd",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": {
+        "available": 140,
+        "demand": 180,
+        "shortage": 40,
+        "transfer_blocked": false
+      },
+      "capabilities": [
+        "inventory.analyze",
+        "data_contract.transform"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "order_group",
+        "snapshot_id": "quality_release",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-7519f8dde0884193b95a45dbb5bb55d1",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": {
+        "available": 150,
+        "demand": 180,
+        "shortage": 30,
+        "transfer_blocked": false
+      },
+      "capabilities": [
+        "inventory.analyze",
+        "data_contract.transform"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "order_group",
+        "snapshot_id": "group_replenished",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-d99fb9b0a8844a839c518b18288733c8",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": {
+        "available": 200,
+        "demand": 180,
+        "shortage": 0,
+        "transfer_blocked": false
+      },
+      "capabilities": [
+        "inventory.analyze",
+        "data_contract.transform"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "order_group",
+        "snapshot_id": "lift_blocked",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-26103fa06871464181362f64c2719abb",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": {
+        "available": 200,
+        "demand": 180,
+        "shortage": 0,
+        "transfer_blocked": true
+      },
+      "capabilities": [
+        "inventory.analyze",
+        "data_contract.transform"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "equipment",
+        "snapshot_id": "morning",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-345710864fe34983b9b2fcd87f82b2a2",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": null,
+      "capabilities": [
+        "equipment.inspect"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "equipment",
+        "snapshot_id": "morning",
+        "mode": "deterministic",
+        "equipment_status": "idle"
+      },
+      "execution_id": "EXEC-MVP-DEMO-47158db8dcb841788995d2e6f67ea78e",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": null,
+      "capabilities": [
+        "equipment.inspect"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "legacy_contract",
+        "snapshot_id": "morning",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-bd93d5b2a8ed40ab979236d3af89e262",
+      "status": "COMPLETED",
+      "error_code": null,
+      "control_board": null,
+      "capabilities": [
+        "inventory.analyze",
+        "data_contract.transform"
+      ]
+    },
+    {
+      "demo": {
+        "demo": "invalid_contract",
+        "snapshot_id": "morning",
+        "mode": "deterministic",
+        "equipment_status": "maintenance"
+      },
+      "execution_id": "EXEC-MVP-DEMO-f91aba4725184a24a87cc02c6aaa113e",
+      "status": "FAILED",
+      "error_code": "CONTRACT_VERSION_NOT_FOUND",
+      "control_board": null,
+      "capabilities": [
+        "inventory.analyze",
+        "data_contract.transform"
+      ]
+    }
+  ],
+  "browser": {
+    "execution_cases": 9,
+    "stock_baseline": [
+      6,
+      10,
+      4
+    ],
+    "equipment_maintenance_attention": true,
+    "legacy_conversion_visible": true,
+    "unknown_version_rejection_visible": true,
+    "execution_query_visible": true,
+    "group_shortages": [
+      60,
+      40,
+      30,
+      0,
+      0
+    ],
+    "last_transfer_blocked": true,
+    "previous_result_cleared_before_new_run": true,
+    "blob_download_event": "not_observed; replaced with tested HTTP attachment endpoint"
+  },
+  "model_calls_in_this_change": 0,
+  "shared_source_matches_local": [
+    "backend/server.py",
+    "backend/runtime_demo.py",
+    "ui/src/main.tsx",
+    "ui/src/runtime-showcase.tsx",
+    "ui/src/runtime-showcase.css",
+    "tests/test_runtime_demo.py",
+    "tests/check_runtime_demo_http.py",
+    "fixtures/b-demo-seed.json",
+    "requirements.lock",
+    "ui/pnpm-lock.yaml"
+  ],
+  "business_state_writes": false,
+  "integration_gate_1": "NOT_RUN",
+  "integration_gate_2": "NOT_RUN",
+  "simulation": "NOT_RUN",
+  "runtime_core_changed": false,
+  "original_B_source_changed": false,
+  "remote_ci": "PENDING"
+}

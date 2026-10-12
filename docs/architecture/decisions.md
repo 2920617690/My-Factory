@@ -27,3 +27,9 @@ Runtime 应用层仅提供 capability_id/version → Provider 的薄映射，负
 当前 `shared/contracts` 是四份规范概念的 Runtime 实施版，供另外两方接入确认。CapabilityRef 采用 capability_id/version；执行状态采用 COMPLETED/FAILED；ErrorEnvelope 带 refs。EventEnvelope 提供 timestamp_utc、refs、schema_version，不同时维护冲突的顶层 task_id 副本。此版本不等于三方已完成联合冻结，不覆盖旧 foundation.*.v1 契约。
 
 Data Contract 的两份样例仅验证旧 `state` → 新 `factory_state` 的机制；不冻结企业全量 Schema。Live/Simulation 域标识分别返回，所有当前 ExecutionResult 的 state_effects 为空。Node 工具执行的是审计过的固定源码，不运行模型生成代码；生成代码隔离要求保留在原 B5 和未来 Sandbox Provider 边界。
+
+## Runtime 可视化交付入口
+
+2026-10-12：新增临时 Runtime 验证面板，复用既有 Foundation 工作台的 React/FastAPI 环境，不新增产品框架或 Agent Loop。浏览器只调用工作台后台；后台通过标准 HttpRuntimeClient 调用 18342 的独立 Runtime。执行输入从不可变 Mock fixture 构造，工作台不实现新的业务 Task 状态机、不改变 Factory State。
+
+可共享的工作台源码保存在 `demos/foundation-workbench`，原本机 `Foundation/app` 继续为运行入口。该目录是临时交付展示与接入参考，Frontend/Platform 正式源码仍待两位学弟提供。只保留本页会话历史、Runtime 进程内查询，以及工作台最近 32 次实际返回的临时导出快照；没有跨进程恢复或平台 Task 持久化承诺。无响应明确显示结果未确认；无效契约保留实际 FAILED 与错误 Trace。共享协议和正式 Integration Gate 不因此改写。

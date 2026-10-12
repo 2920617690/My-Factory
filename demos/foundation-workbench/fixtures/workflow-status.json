@@ -1,0 +1,24 @@
+{
+  "snapshot_on": "2026-10-12",
+  "source": "historical_independent_validation_snapshot",
+  "tasks": [
+    {
+      "id": "MF-P0-A",
+      "status": "NOT_RUN",
+      "owner": "学弟（负责 A，姓名未提供）"
+    },
+    {
+      "id": "MF-P0-B",
+      "status": "PASS",
+      "owner": "用户（Codex 协助）"
+    },
+    {
+      "id": "MF-P0-C",
+      "status": "NOT_RUN",
+      "owner": "学弟（负责 C，姓名未提供）"
+    }
+  ],
+  "integration": {
+    "status": "NOT_RUN"
+  }
+}
