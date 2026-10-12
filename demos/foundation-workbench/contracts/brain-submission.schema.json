@@ -1,0 +1,56 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {
+      "pattern": "^FDN-[a-f0-9]{32}$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "snapshot_id": {
+      "title": "Snapshot Id",
+      "type": "string"
+    },
+    "order_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Order Id"
+    },
+    "order_ids": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 2,
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Order Ids"
+    },
+    "question": {
+      "maxLength": 1600,
+      "minLength": 1,
+      "title": "Question",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "snapshot_id",
+    "question"
+  ],
+  "title": "BrainSubmission",
+  "type": "object"
+}

@@ -1,0 +1,353 @@
+{
+  "$defs": {
+    "BomLine": {
+      "additionalProperties": false,
+      "properties": {
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "per_unit": {
+          "minimum": 1,
+          "title": "Per Unit",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "per_unit"
+      ],
+      "title": "BomLine",
+      "type": "object"
+    },
+    "Inventory": {
+      "additionalProperties": false,
+      "properties": {
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "on_hand": {
+          "minimum": 0,
+          "title": "On Hand",
+          "type": "integer"
+        },
+        "reserved": {
+          "minimum": 0,
+          "title": "Reserved",
+          "type": "integer"
+        },
+        "quality_hold": {
+          "minimum": 0,
+          "title": "Quality Hold",
+          "type": "integer"
+        },
+        "available": {
+          "minimum": 0,
+          "title": "Available",
+          "type": "integer"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "floor_available": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Floor Available",
+          "type": "object"
+        },
+        "provenance": {
+          "items": {
+            "$ref": "#/$defs/Provenance"
+          },
+          "title": "Provenance",
+          "type": "array"
+        }
+      },
+      "required": [
+        "material_id",
+        "on_hand",
+        "reserved",
+        "quality_hold",
+        "available",
+        "version",
+        "floor_available",
+        "provenance"
+      ],
+      "title": "Inventory",
+      "type": "object"
+    },
+    "Location": {
+      "additionalProperties": false,
+      "properties": {
+        "location_id": {
+          "title": "Location Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "floor": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Floor",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "location_id",
+        "name",
+        "floor"
+      ],
+      "title": "Location",
+      "type": "object"
+    },
+    "Material": {
+      "additionalProperties": false,
+      "properties": {
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "piece",
+            "set"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "source_unit": {
+          "title": "Source Unit",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "material_id",
+        "name",
+        "unit",
+        "source_unit",
+        "provenance"
+      ],
+      "title": "Material",
+      "type": "object"
+    },
+    "Order": {
+      "additionalProperties": false,
+      "properties": {
+        "order_id": {
+          "title": "Order Id",
+          "type": "string"
+        },
+        "product": {
+          "title": "Product",
+          "type": "string"
+        },
+        "quantity": {
+          "minimum": 0,
+          "title": "Quantity",
+          "type": "integer"
+        },
+        "target_floor": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Target Floor",
+          "type": "integer"
+        },
+        "line_id": {
+          "title": "Line Id",
+          "type": "string"
+        },
+        "due_at": {
+          "format": "date-time",
+          "title": "Due At",
+          "type": "string"
+        },
+        "priority": {
+          "title": "Priority",
+          "type": "string"
+        },
+        "bom": {
+          "items": {
+            "$ref": "#/$defs/BomLine"
+          },
+          "title": "Bom",
+          "type": "array"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "order_id",
+        "product",
+        "quantity",
+        "target_floor",
+        "line_id",
+        "due_at",
+        "priority",
+        "bom",
+        "provenance"
+      ],
+      "title": "Order",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "source_system": {
+          "title": "Source System",
+          "type": "string"
+        },
+        "source_record_id": {
+          "title": "Source Record Id",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "mapping_version": {
+          "const": "foundation.mapping.v1",
+          "default": "foundation.mapping.v1",
+          "title": "Mapping Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_system",
+        "source_record_id",
+        "observed_at"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "foundation.factory-state.v1",
+      "default": "foundation.factory-state.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "factory_id": {
+      "const": "FACTORY-001",
+      "default": "FACTORY-001",
+      "title": "Factory Id",
+      "type": "string"
+    },
+    "factory_name": {
+      "title": "Factory Name",
+      "type": "string"
+    },
+    "timezone": {
+      "const": "Asia/Shanghai",
+      "default": "Asia/Shanghai",
+      "title": "Timezone",
+      "type": "string"
+    },
+    "data_mode": {
+      "const": "mock",
+      "default": "mock",
+      "title": "Data Mode",
+      "type": "string"
+    },
+    "state_domain": {
+      "const": "business_view",
+      "default": "business_view",
+      "title": "State Domain",
+      "type": "string"
+    },
+    "authority": {
+      "const": "temporary_mock_seed",
+      "default": "temporary_mock_seed",
+      "title": "Authority",
+      "type": "string"
+    },
+    "snapshot_id": {
+      "title": "Snapshot Id",
+      "type": "string"
+    },
+    "as_of": {
+      "format": "date-time",
+      "title": "As Of",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "seed_sha256": {
+      "title": "Seed Sha256",
+      "type": "string"
+    },
+    "materials": {
+      "items": {
+        "$ref": "#/$defs/Material"
+      },
+      "title": "Materials",
+      "type": "array"
+    },
+    "inventory": {
+      "items": {
+        "$ref": "#/$defs/Inventory"
+      },
+      "title": "Inventory",
+      "type": "array"
+    },
+    "orders": {
+      "items": {
+        "$ref": "#/$defs/Order"
+      },
+      "title": "Orders",
+      "type": "array"
+    },
+    "locations": {
+      "items": {
+        "$ref": "#/$defs/Location"
+      },
+      "title": "Locations",
+      "type": "array"
+    },
+    "equipment": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Equipment",
+      "type": "array"
+    }
+  },
+  "required": [
+    "factory_name",
+    "snapshot_id",
+    "as_of",
+    "revision",
+    "seed_sha256",
+    "materials",
+    "inventory",
+    "orders",
+    "locations"
+  ],
+  "title": "FactoryState",
+  "type": "object"
+}

@@ -21,3 +21,7 @@ runtime/evidence/raw/
 runtime/evidence/source-manifest.json
 runtime/evidence/package-checks.json
 runtime/evidence/git-publication.json
+# Generated demo assets and temporary gateway records stay local.
+demos/**/ui/dist/
+demos/**/state/
+demos/**/evidence/

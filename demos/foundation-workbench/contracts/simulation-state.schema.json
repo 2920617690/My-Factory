@@ -1,0 +1,59 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "foundation.simulation-state.v1",
+      "default": "foundation.simulation-state.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "state_domain": {
+      "const": "simulation",
+      "default": "simulation",
+      "title": "State Domain",
+      "type": "string"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scenario_id": {
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "clock_unit": {
+      "const": "minute",
+      "default": "minute",
+      "title": "Clock Unit",
+      "type": "string"
+    },
+    "sim_time": {
+      "minimum": 0,
+      "title": "Sim Time",
+      "type": "number"
+    },
+    "inventory": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Inventory",
+      "type": "object"
+    },
+    "equipment": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Equipment",
+      "type": "object"
+    }
+  },
+  "required": [
+    "run_id",
+    "scenario_id",
+    "sim_time",
+    "inventory"
+  ],
+  "title": "SimulationState",
+  "type": "object"
+}

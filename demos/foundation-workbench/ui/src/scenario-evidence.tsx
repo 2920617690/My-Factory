@@ -1,0 +1,35 @@
+import {useEffect,useState} from 'react';
+import {preferredMaterial,returnedRows} from './evidence-data';
+import './evidence.css';
+
+const copy={title:'这一步的数据变化',preview:'预设模拟快照 · 不执行收货或搬运',material:'查看变化物料',initial:'初始截面',before:'上一步',now:'当前',delta:'变化',item:'库存字段',on_hand:'账面',reserved:'预留',quality_hold:'待检',available:'净可用',demand:'需求',shortage:'缺口',local_available:'目标楼层可用',transfer_quantity:'需跨层备料',receipt:'本采购累计收货',released:'已放行',hold:'待检',unreceived:'未到货',lotChanges:'变化批次',added:'新增批次',unit:'单位',transport:'跨层通道',open:'可用，尚未执行搬运',blocked:'停用',events:'查看累计模拟事件',source:'查看原始模拟快照',actual:'实际工具返回',returnMaterial:'查看工具返回物料',lots:'实际返回中的收货批次',raw:'查看完整原始返回',snapshot:'截面',noChange:'本物料数量没有变化',unmatched:'所选物料未包含在这项工具返回中'};
+const t=(key:keyof typeof copy)=>copy[key];
+const n=(v:number)=>v.toLocaleString('zh-CN');
+const time=(v:string)=>new Date(v).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',hour12:false});
+type Lot={lot_id:string;on_hand:number;reserved:number;quality:string;floor:number;po_id?:string;source_ref:string};
+type Purchase={po_id:string;material_id:string;quantity:number;received_quantity?:number;ordered_quantity?:number};
+type Stock={material_id:string;name:string;unit:string;on_hand:number;reserved:number;quality_hold:number;available:number;lots:Lot[];inbound?:Purchase[]};
+export type SourceSnapshot={snapshot_id:string;title:string;as_of:string;version:number;inventory:Stock[];inbound?:Purchase[];business_events?:{at:string;title:string;detail:string;source_ref:string}[];transport_constraints?:{available:boolean;reason:string}};
+const fields=['on_hand','reserved','quality_hold','available'] as const;
+
+/** Present immutable mock inputs separately from actual recorded tool returns. */
+export function ScenarioEvidence({current,previous}:{current:SourceSnapshot;previous:SourceSnapshot|null}){
+ const [id,setId]=useState(()=>preferredMaterial(current.snapshot_id,current.inventory.map(m=>m.material_id)));
+ useEffect(()=>setId(preferredMaterial(current.snapshot_id,current.inventory.map(m=>m.material_id))),[current.snapshot_id]);
+ const row=current.inventory.find(m=>m.material_id===id);if(!row)return null;
+ const before=previous?.inventory.find(m=>m.material_id===id);
+ const purchases=(current.inbound??row.inbound??[]).filter(p=>p.material_id===id);
+ const changes=row.lots.filter(l=>{const old=before?.lots.find(r=>r.lot_id===l.lot_id);return !old||['on_hand','reserved','quality','floor'].some(k=>old[k as keyof Lot]!==l[k as keyof Lot])});
+ const event=current.business_events?.at(-1);
+ return <section className="scenario-evidence" data-testid="scenario-evidence"><div className="evidence-head"><h2>{t('title')}</h2><span>{t('preview')}</span></div><div className="evidence-identity"><b>{current.title}</b><small>{current.snapshot_id} · v{current.version} · {time(current.as_of)}</small></div>{event&&<div className="evidence-event"><b>{event.title}</b><p>{event.detail}</p><small>{event.source_ref}</small></div>}<label className="evidence-select">{t('material')}<select value={id} onChange={e=>setId(e.target.value)}>{current.inventory.map(m=><option key={m.material_id} value={m.material_id}>{m.name} · {m.material_id}</option>)}</select></label><div className="evidence-table"><table><thead><tr><th>{t('item')} · {row.unit}</th><th>{previous?`${t('before')} ${previous.title}`:t('initial')}</th><th>{t('now')}</th><th>{t('delta')}</th></tr></thead><tbody>{fields.map(k=>{const delta=before?row[k]-before[k]:null;return <tr key={k}><td>{t(k)}</td><td>{before?n(before[k]):'—'}</td><td>{n(row[k])}</td><td className={delta?'evidence-changed':''}>{delta===null?'—':delta>0?'+'+n(delta):n(delta)}</td></tr>})}</tbody></table></div>{purchases.map(p=>{const lots=row.lots.filter(l=>l.po_id===p.po_id);return <div className="receipt-evidence" key={p.po_id}><b>{p.po_id} · {t('receipt')} {p.received_quantity??lots.reduce((sum,l)=>sum+l.on_hand,0)} {row.unit}</b><span>{t('released')} {lots.filter(l=>l.quality==='released').reduce((sum,l)=>sum+l.on_hand,0)} {row.unit} · {t('hold')} {lots.filter(l=>l.quality==='hold').reduce((sum,l)=>sum+l.on_hand,0)} {row.unit} · {t('unreceived')} {p.quantity} {row.unit}</span></div>})}{previous&&changes.length>0&&<div className="lot-evidence"><b>{t('lotChanges')}</b>{changes.map(l=>{const old=before?.lots.find(r=>r.lot_id===l.lot_id);return <p key={l.lot_id}><code>{l.lot_id}</code><span>{old?`${old.quality==='hold'?t('hold'):t('released')} → ${l.quality==='hold'?t('hold'):t('released')}`:t('added')} · {l.on_hand} {row.unit}</span></p>})}</div>}{current.transport_constraints&&<div className={'transport-evidence '+(!current.transport_constraints.available?'blocked':'')}><b>{t('transport')}：{current.transport_constraints.available?t('open'):t('blocked')}</b><span>{current.transport_constraints.reason}</span></div>}{current.business_events&&<details className="evidence-events"><summary>{t('events')}</summary>{current.business_events.map(e=><p key={e.source_ref}>{time(e.at)} · {e.title}<small>{e.detail}</small></p>)}</details>}<details className="evidence-events"><summary>{t('source')}</summary><pre>{JSON.stringify(current,null,2)}</pre></details></section>;
+}
+
+/** Show selected material fields directly from a persisted official tool.end payload. */
+export function ToolFacts({value}:{value:unknown}){
+ const rows=returnedRows(value);const data=value&&typeof value==='object'?value as Record<string,unknown>:{};
+ const snapshot=typeof data.snapshot_id==='string'?data.snapshot_id:'';
+ const [id,setId]=useState(()=>preferredMaterial(snapshot,rows.map(r=>String(r.material_id))));
+ useEffect(()=>setId(preferredMaterial(snapshot,rows.map(r=>String(r.material_id)))),[value]);
+ const row=rows.find(r=>r.material_id===id);const unit=typeof row?.unit==='string'?row.unit:'';
+ return <div className="tool-facts" data-testid="tool-facts"><b>{t('actual')} · {t('snapshot')} {snapshot} · v{String(data.version??'')}</b>{row&&<><label className="evidence-select">{t('returnMaterial')}<select value={id} onChange={e=>setId(e.target.value)}>{rows.map(r=><option key={String(r.material_id)} value={String(r.material_id)}>{String(r.name??r.material_id)} · {String(r.material_id)}</option>)}</select></label><dl>{(['demand','on_hand','reserved','quality_hold','available','shortage','local_available','transfer_quantity'] as const).filter(k=>typeof row[k]==='number').map(k=><div key={k}><dt>{t(k)}</dt><dd>{n(row[k] as number)} {unit}</dd></div>)}</dl>{row.transfer_blocked===true&&<p className="tool-blocked">{t('transport')}：{t('blocked')}</p>}{Array.isArray(row.lots)&&row.lots.some(l=>l&&typeof l==='object'&&'po_id' in l)&&<div className="lot-evidence"><b>{t('lots')}</b>{row.lots.filter((l):l is Record<string,unknown>=>!!l&&typeof l==='object'&&'po_id' in l).map(l=><p key={String(l.lot_id)}><code>{String(l.lot_id)}</code><span>{String(l.on_hand)} {unit} · {l.quality==='hold'?t('hold'):t('released')}</span></p>)}</div>}</>}<details className="raw-tool-return"><summary>{t('raw')}</summary><pre>{JSON.stringify(value,null,2)}</pre></details></div>;
+}

@@ -1,0 +1,4255 @@
+{
+  "scenario_type": "synthetic_discrete_assembly",
+  "scenarios": [
+    {
+      "schema_version": "demo.1.0",
+      "factory_id": "FACTORY-001",
+      "factory_name": "SVS 双层装配演示厂",
+      "data_mode": "mock",
+      "source_system": "mock_erp_wms",
+      "as_of": "2026-09-29T08:00:00+08:00",
+      "version": 1,
+      "locations": [
+        {
+          "id": "L1-RAW",
+          "name": "原料库",
+          "floor": 1
+        },
+        {
+          "id": "L1-IQC",
+          "name": "待检区",
+          "floor": 1
+        },
+        {
+          "id": "L1-IN",
+          "name": "收货区",
+          "floor": 1
+        },
+        {
+          "id": "L2-A",
+          "name": "装配线 A",
+          "floor": 2
+        },
+        {
+          "id": "L2-B",
+          "name": "装配线 B",
+          "floor": 2
+        },
+        {
+          "id": "L2-BUF",
+          "name": "线边库",
+          "floor": 2
+        }
+      ],
+      "materials": [
+        {
+          "material_id": "MAT-001",
+          "name": "伺服电机",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-002",
+          "name": "驱动控制板",
+          "unit": "片"
+        },
+        {
+          "material_id": "MAT-003",
+          "name": "功率模块",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-004",
+          "name": "精密连接器",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-005",
+          "name": "铝合金壳体",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-006",
+          "name": "精密轴承",
+          "unit": "套"
+        },
+        {
+          "material_id": "MAT-007",
+          "name": "紧固螺钉",
+          "unit": "颗"
+        },
+        {
+          "material_id": "MAT-008",
+          "name": "成品包装箱",
+          "unit": "个"
+        }
+      ],
+      "lots": [
+        {
+          "lot_id": "LOT-001-R",
+          "material_id": "MAT-001",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 6,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-001"
+        },
+        {
+          "lot_id": "LOT-002-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 100,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-002"
+        },
+        {
+          "lot_id": "LOT-002-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q002"
+        },
+        {
+          "lot_id": "LOT-003-R",
+          "material_id": "MAT-002",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-003"
+        },
+        {
+          "lot_id": "LOT-004-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 60,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-004"
+        },
+        {
+          "lot_id": "LOT-004-Q",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q004"
+        },
+        {
+          "lot_id": "LOT-005-R",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-005"
+        },
+        {
+          "lot_id": "LOT-006-R",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 340,
+          "reserved": 160,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-006"
+        },
+        {
+          "lot_id": "LOT-006-Q",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q006"
+        },
+        {
+          "lot_id": "LOT-007-R",
+          "material_id": "MAT-004",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 260,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-007"
+        },
+        {
+          "lot_id": "LOT-008-R",
+          "material_id": "MAT-005",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-008"
+        },
+        {
+          "lot_id": "LOT-009-R",
+          "material_id": "MAT-005",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-009"
+        },
+        {
+          "lot_id": "LOT-010-R",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-010"
+        },
+        {
+          "lot_id": "LOT-010-Q",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q010"
+        },
+        {
+          "lot_id": "LOT-011-R",
+          "material_id": "MAT-006",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 140,
+          "reserved": 40,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-011"
+        },
+        {
+          "lot_id": "LOT-012-R",
+          "material_id": "MAT-007",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 14000,
+          "reserved": 8000,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-012"
+        },
+        {
+          "lot_id": "LOT-013-R",
+          "material_id": "MAT-007",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 4000,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-013"
+        },
+        {
+          "lot_id": "LOT-014-R",
+          "material_id": "MAT-008",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 130,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-014"
+        },
+        {
+          "lot_id": "LOT-015-R",
+          "material_id": "MAT-008",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-015"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "ORD-001",
+          "product": "电机备料验收样例",
+          "quantity": 10,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T14:00:00+08:00",
+          "priority": "验收",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-001",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1001",
+          "product": "SVS 驱动模组",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T15:30:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-003",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 12
+            },
+            {
+              "material_id": "MAT-008",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1002",
+          "product": "精密传动组件",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-09-29T17:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 8
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1002",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1003",
+          "product": "控制板组件",
+          "quantity": 60,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T12:00:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 6
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1003",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1004",
+          "product": "传动组件加急单",
+          "quantity": 40,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-09-29T13:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1004",
+          "version": 1
+        }
+      ],
+      "inbound": [
+        {
+          "po_id": "PO-MOCK-501",
+          "material_id": "MAT-003",
+          "quantity": 50,
+          "eta": "2026-09-29T16:00:00+08:00",
+          "status": "在途",
+          "confirmed_receipt": false
+        },
+        {
+          "po_id": "PO-MOCK-502",
+          "material_id": "MAT-006",
+          "quantity": 100,
+          "eta": "2026-09-30T09:00:00+08:00",
+          "status": "待供应商发运",
+          "confirmed_receipt": false
+        }
+      ],
+      "notes": [
+        "全部为合成演示数据，不代表 SVS 企业真实现场。",
+        "预留属于其他已占用需求，不在本轮分配给新的订单。",
+        "未放行批次与未确认收货的在途采购不计入可用库存。",
+        "各订单独立做静态可用量检查，未执行多订单排产或库存分配。"
+      ],
+      "snapshot_id": "morning",
+      "title": "早班库存截面",
+      "description": "包含预留、待检、在途和跨层库位。"
+    },
+    {
+      "schema_version": "demo.1.0",
+      "factory_id": "FACTORY-001",
+      "factory_name": "SVS 双层装配演示厂",
+      "data_mode": "mock",
+      "source_system": "mock_erp_wms",
+      "as_of": "2026-09-29T09:20:00+08:00",
+      "version": 2,
+      "locations": [
+        {
+          "id": "L1-RAW",
+          "name": "原料库",
+          "floor": 1
+        },
+        {
+          "id": "L1-IQC",
+          "name": "待检区",
+          "floor": 1
+        },
+        {
+          "id": "L1-IN",
+          "name": "收货区",
+          "floor": 1
+        },
+        {
+          "id": "L2-A",
+          "name": "装配线 A",
+          "floor": 2
+        },
+        {
+          "id": "L2-B",
+          "name": "装配线 B",
+          "floor": 2
+        },
+        {
+          "id": "L2-BUF",
+          "name": "线边库",
+          "floor": 2
+        }
+      ],
+      "materials": [
+        {
+          "material_id": "MAT-001",
+          "name": "伺服电机",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-002",
+          "name": "驱动控制板",
+          "unit": "片"
+        },
+        {
+          "material_id": "MAT-003",
+          "name": "功率模块",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-004",
+          "name": "精密连接器",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-005",
+          "name": "铝合金壳体",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-006",
+          "name": "精密轴承",
+          "unit": "套"
+        },
+        {
+          "material_id": "MAT-007",
+          "name": "紧固螺钉",
+          "unit": "颗"
+        },
+        {
+          "material_id": "MAT-008",
+          "name": "成品包装箱",
+          "unit": "个"
+        }
+      ],
+      "lots": [
+        {
+          "lot_id": "LOT-001-R",
+          "material_id": "MAT-001",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 6,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-001"
+        },
+        {
+          "lot_id": "LOT-002-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 100,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-002"
+        },
+        {
+          "lot_id": "LOT-002-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q002"
+        },
+        {
+          "lot_id": "LOT-003-R",
+          "material_id": "MAT-002",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-003"
+        },
+        {
+          "lot_id": "LOT-004-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 60,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-004"
+        },
+        {
+          "lot_id": "LOT-004-Q",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q004"
+        },
+        {
+          "lot_id": "LOT-005-R",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 2,
+          "source_ref": "WMS-MOCK-005"
+        },
+        {
+          "lot_id": "LOT-006-R",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 340,
+          "reserved": 160,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-006"
+        },
+        {
+          "lot_id": "LOT-006-Q",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q006"
+        },
+        {
+          "lot_id": "LOT-007-R",
+          "material_id": "MAT-004",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 260,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-007"
+        },
+        {
+          "lot_id": "LOT-008-R",
+          "material_id": "MAT-005",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-008"
+        },
+        {
+          "lot_id": "LOT-009-R",
+          "material_id": "MAT-005",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-009"
+        },
+        {
+          "lot_id": "LOT-010-R",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-010"
+        },
+        {
+          "lot_id": "LOT-010-Q",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q010"
+        },
+        {
+          "lot_id": "LOT-011-R",
+          "material_id": "MAT-006",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 140,
+          "reserved": 40,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-011"
+        },
+        {
+          "lot_id": "LOT-012-R",
+          "material_id": "MAT-007",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 14000,
+          "reserved": 8000,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-012"
+        },
+        {
+          "lot_id": "LOT-013-R",
+          "material_id": "MAT-007",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 4000,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-013"
+        },
+        {
+          "lot_id": "LOT-014-R",
+          "material_id": "MAT-008",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 130,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-014"
+        },
+        {
+          "lot_id": "LOT-015-R",
+          "material_id": "MAT-008",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-015"
+        },
+        {
+          "lot_id": "LOT-DEMO-HOLD-40",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T09:20:00+08:00",
+          "version": 2,
+          "source_ref": "WMS-MOCK-QUALITY-CHANGE"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "ORD-001",
+          "product": "电机备料验收样例",
+          "quantity": 10,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T14:00:00+08:00",
+          "priority": "验收",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-001",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1001",
+          "product": "SVS 驱动模组",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T15:30:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-003",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 12
+            },
+            {
+              "material_id": "MAT-008",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1002",
+          "product": "精密传动组件",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-09-29T17:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 8
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1002",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1003",
+          "product": "控制板组件",
+          "quantity": 60,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T12:00:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 6
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1003",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1004",
+          "product": "传动组件加急单",
+          "quantity": 40,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-09-29T13:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1004",
+          "version": 1
+        }
+      ],
+      "inbound": [
+        {
+          "po_id": "PO-MOCK-501",
+          "material_id": "MAT-003",
+          "quantity": 50,
+          "eta": "2026-09-29T16:00:00+08:00",
+          "status": "在途",
+          "confirmed_receipt": false
+        },
+        {
+          "po_id": "PO-MOCK-502",
+          "material_id": "MAT-006",
+          "quantity": 100,
+          "eta": "2026-09-30T09:00:00+08:00",
+          "status": "待供应商发运",
+          "confirmed_receipt": false
+        }
+      ],
+      "notes": [
+        "全部为合成演示数据，不代表 SVS 企业真实现场。",
+        "预留属于其他已占用需求，不在本轮分配给新的订单。",
+        "未放行批次与未确认收货的在途采购不计入可用库存。",
+        "各订单独立做静态可用量检查，未执行多订单排产或库存分配。"
+      ],
+      "snapshot_id": "quality_hold",
+      "title": "批次临时待检",
+      "description": "二层 40 件功率模块转待检，观察真实缺口变化。"
+    },
+    {
+      "schema_version": "demo.1.0",
+      "factory_id": "FACTORY-001",
+      "factory_name": "SVS 双层装配演示厂",
+      "data_mode": "mock",
+      "source_system": "mock_erp_wms",
+      "as_of": "2026-09-29T16:10:00+08:00",
+      "version": 3,
+      "locations": [
+        {
+          "id": "L1-RAW",
+          "name": "原料库",
+          "floor": 1
+        },
+        {
+          "id": "L1-IQC",
+          "name": "待检区",
+          "floor": 1
+        },
+        {
+          "id": "L1-IN",
+          "name": "收货区",
+          "floor": 1
+        },
+        {
+          "id": "L2-A",
+          "name": "装配线 A",
+          "floor": 2
+        },
+        {
+          "id": "L2-B",
+          "name": "装配线 B",
+          "floor": 2
+        },
+        {
+          "id": "L2-BUF",
+          "name": "线边库",
+          "floor": 2
+        }
+      ],
+      "materials": [
+        {
+          "material_id": "MAT-001",
+          "name": "伺服电机",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-002",
+          "name": "驱动控制板",
+          "unit": "片"
+        },
+        {
+          "material_id": "MAT-003",
+          "name": "功率模块",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-004",
+          "name": "精密连接器",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-005",
+          "name": "铝合金壳体",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-006",
+          "name": "精密轴承",
+          "unit": "套"
+        },
+        {
+          "material_id": "MAT-007",
+          "name": "紧固螺钉",
+          "unit": "颗"
+        },
+        {
+          "material_id": "MAT-008",
+          "name": "成品包装箱",
+          "unit": "个"
+        }
+      ],
+      "lots": [
+        {
+          "lot_id": "LOT-001-R",
+          "material_id": "MAT-001",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 6,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-001"
+        },
+        {
+          "lot_id": "LOT-002-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 100,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-002"
+        },
+        {
+          "lot_id": "LOT-002-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q002"
+        },
+        {
+          "lot_id": "LOT-003-R",
+          "material_id": "MAT-002",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-003"
+        },
+        {
+          "lot_id": "LOT-004-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 60,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-004"
+        },
+        {
+          "lot_id": "LOT-004-Q",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q004"
+        },
+        {
+          "lot_id": "LOT-005-R",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-005"
+        },
+        {
+          "lot_id": "LOT-006-R",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 340,
+          "reserved": 160,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-006"
+        },
+        {
+          "lot_id": "LOT-006-Q",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q006"
+        },
+        {
+          "lot_id": "LOT-007-R",
+          "material_id": "MAT-004",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 260,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-007"
+        },
+        {
+          "lot_id": "LOT-008-R",
+          "material_id": "MAT-005",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-008"
+        },
+        {
+          "lot_id": "LOT-009-R",
+          "material_id": "MAT-005",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-009"
+        },
+        {
+          "lot_id": "LOT-010-R",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-010"
+        },
+        {
+          "lot_id": "LOT-010-Q",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q010"
+        },
+        {
+          "lot_id": "LOT-011-R",
+          "material_id": "MAT-006",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 140,
+          "reserved": 40,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-011"
+        },
+        {
+          "lot_id": "LOT-012-R",
+          "material_id": "MAT-007",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 14000,
+          "reserved": 8000,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-012"
+        },
+        {
+          "lot_id": "LOT-013-R",
+          "material_id": "MAT-007",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 4000,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-013"
+        },
+        {
+          "lot_id": "LOT-014-R",
+          "material_id": "MAT-008",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 130,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-014"
+        },
+        {
+          "lot_id": "LOT-015-R",
+          "material_id": "MAT-008",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-015"
+        },
+        {
+          "lot_id": "LOT-PO-501-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 50,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-29T16:10:00+08:00",
+          "version": 3,
+          "source_ref": "WMS-MOCK-RECEIPT-PO501"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "ORD-001",
+          "product": "电机备料验收样例",
+          "quantity": 10,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T14:00:00+08:00",
+          "priority": "验收",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-001",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1001",
+          "product": "SVS 驱动模组",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T15:30:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-003",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 12
+            },
+            {
+              "material_id": "MAT-008",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1002",
+          "product": "精密传动组件",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-09-29T17:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 8
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1002",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1003",
+          "product": "控制板组件",
+          "quantity": 60,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-09-29T12:00:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 6
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1003",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1004",
+          "product": "传动组件加急单",
+          "quantity": 40,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-09-29T13:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1004",
+          "version": 1
+        }
+      ],
+      "inbound": [
+        {
+          "po_id": "PO-MOCK-501",
+          "material_id": "MAT-003",
+          "quantity": 50,
+          "eta": "2026-09-29T16:00:00+08:00",
+          "status": "已收货放行",
+          "confirmed_receipt": true
+        },
+        {
+          "po_id": "PO-MOCK-502",
+          "material_id": "MAT-006",
+          "quantity": 100,
+          "eta": "2026-09-30T09:00:00+08:00",
+          "status": "待供应商发运",
+          "confirmed_receipt": false
+        }
+      ],
+      "notes": [
+        "全部为合成演示数据，不代表 SVS 企业真实现场。",
+        "预留属于其他已占用需求，不在本轮分配给新的订单。",
+        "未放行批次与未确认收货的在途采购不计入可用库存。",
+        "各订单独立做静态可用量检查，未执行多订单排产或库存分配。"
+      ],
+      "snapshot_id": "received",
+      "title": "采购已确认收货",
+      "description": "50 件功率模块已收货并放行，仍需核对跨层备料。"
+    },
+    {
+      "schema_version": "demo.2.0",
+      "factory_id": "FACTORY-001",
+      "factory_name": "SVS 双层装配演示厂",
+      "data_mode": "mock",
+      "source_system": "mock_erp_wms",
+      "as_of": "2026-10-10T09:00:00+08:00",
+      "version": 10,
+      "locations": [
+        {
+          "id": "L1-RAW",
+          "name": "原料库",
+          "floor": 1
+        },
+        {
+          "id": "L1-IQC",
+          "name": "待检区",
+          "floor": 1
+        },
+        {
+          "id": "L1-IN",
+          "name": "收货区",
+          "floor": 1
+        },
+        {
+          "id": "L2-A",
+          "name": "装配线 A",
+          "floor": 2
+        },
+        {
+          "id": "L2-B",
+          "name": "装配线 B",
+          "floor": 2
+        },
+        {
+          "id": "L2-BUF",
+          "name": "线边库",
+          "floor": 2
+        }
+      ],
+      "materials": [
+        {
+          "material_id": "MAT-001",
+          "name": "伺服电机",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-002",
+          "name": "驱动控制板",
+          "unit": "片"
+        },
+        {
+          "material_id": "MAT-003",
+          "name": "功率模块",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-004",
+          "name": "精密连接器",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-005",
+          "name": "铝合金壳体",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-006",
+          "name": "精密轴承",
+          "unit": "套"
+        },
+        {
+          "material_id": "MAT-007",
+          "name": "紧固螺钉",
+          "unit": "颗"
+        },
+        {
+          "material_id": "MAT-008",
+          "name": "成品包装箱",
+          "unit": "个"
+        }
+      ],
+      "lots": [
+        {
+          "lot_id": "LOT-001-R",
+          "material_id": "MAT-001",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 6,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-001"
+        },
+        {
+          "lot_id": "LOT-002-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 100,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-002"
+        },
+        {
+          "lot_id": "LOT-002-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q002"
+        },
+        {
+          "lot_id": "LOT-003-R",
+          "material_id": "MAT-002",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-003"
+        },
+        {
+          "lot_id": "LOT-004-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 60,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-004"
+        },
+        {
+          "lot_id": "LOT-004-Q",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q004"
+        },
+        {
+          "lot_id": "LOT-005-R",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-005"
+        },
+        {
+          "lot_id": "LOT-006-R",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 340,
+          "reserved": 160,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-006"
+        },
+        {
+          "lot_id": "LOT-006-Q",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q006"
+        },
+        {
+          "lot_id": "LOT-007-R",
+          "material_id": "MAT-004",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 260,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-007"
+        },
+        {
+          "lot_id": "LOT-008-R",
+          "material_id": "MAT-005",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-008"
+        },
+        {
+          "lot_id": "LOT-009-R",
+          "material_id": "MAT-005",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-009"
+        },
+        {
+          "lot_id": "LOT-010-R",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-010"
+        },
+        {
+          "lot_id": "LOT-010-Q",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q010"
+        },
+        {
+          "lot_id": "LOT-011-R",
+          "material_id": "MAT-006",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 140,
+          "reserved": 40,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-011"
+        },
+        {
+          "lot_id": "LOT-012-R",
+          "material_id": "MAT-007",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 14000,
+          "reserved": 8000,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-012"
+        },
+        {
+          "lot_id": "LOT-013-R",
+          "material_id": "MAT-007",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 4000,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-013"
+        },
+        {
+          "lot_id": "LOT-014-R",
+          "material_id": "MAT-008",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 130,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-014"
+        },
+        {
+          "lot_id": "LOT-015-R",
+          "material_id": "MAT-008",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-015"
+        },
+        {
+          "lot_id": "LOT-PO-501-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 50,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-29T16:10:00+08:00",
+          "version": 3,
+          "source_ref": "WMS-MOCK-RECEIPT-PO501"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "ORD-001",
+          "product": "电机备料验收样例",
+          "quantity": 10,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T14:00:00+08:00",
+          "priority": "验收",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-001",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1001",
+          "product": "SVS 驱动模组",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T15:30:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-003",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 12
+            },
+            {
+              "material_id": "MAT-008",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1002",
+          "product": "精密传动组件",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T17:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 8
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1002",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1003",
+          "product": "控制板组件",
+          "quantity": 60,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T12:00:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 6
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1003",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1004",
+          "product": "传动组件加急单",
+          "quantity": 40,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T13:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1004",
+          "version": 1
+        }
+      ],
+      "inbound": [
+        {
+          "po_id": "PO-MOCK-501",
+          "material_id": "MAT-003",
+          "quantity": 50,
+          "eta": "2026-09-29T16:00:00+08:00",
+          "status": "已收货放行",
+          "confirmed_receipt": true
+        },
+        {
+          "po_id": "PO-MOCK-502",
+          "material_id": "MAT-006",
+          "quantity": 100,
+          "eta": "2026-09-30T09:00:00+08:00",
+          "status": "待供应商发运",
+          "confirmed_receipt": false
+        },
+        {
+          "po_id": "PO-MOCK-503",
+          "material_id": "MAT-002",
+          "quantity": 80,
+          "ordered_quantity": 80,
+          "received_quantity": 0,
+          "eta": "2026-10-10T11:00:00+08:00",
+          "status": "在途",
+          "confirmed_receipt": false
+        }
+      ],
+      "notes": [
+        "全部为合成演示数据，不代表 SVS 企业真实现场。",
+        "预留属于其他已占用需求，不在本轮分配给新的订单。",
+        "未放行批次与未确认收货的在途采购不计入可用库存。",
+        "各订单独立做静态可用量检查，未执行多订单排产或库存分配。"
+      ],
+      "snapshot_id": "contended",
+      "title": "急单共同备料",
+      "description": "单独检查两张订单均满足；合并需求后控制板缺60片。",
+      "transport_constraints": {
+        "from_floor": 1,
+        "to_floor": 2,
+        "available": true,
+        "reason": "提升通道可用，实际搬运时间未验证",
+        "source_ref": "WCS-MOCK-LIFT-01"
+      },
+      "business_events": [
+        {
+          "at": "2026-10-10T09:00:00+08:00",
+          "title": "两张急单同时备料",
+          "detail": "ORD-1001 与 ORD-1003 共需控制板180片；账面240片，预留100片、待检20片，净可用120片。现有预留不属于这两张待备料单。",
+          "source_ref": "ERP-MOCK-WAVE-01"
+        }
+      ]
+    },
+    {
+      "schema_version": "demo.2.0",
+      "factory_id": "FACTORY-001",
+      "factory_name": "SVS 双层装配演示厂",
+      "data_mode": "mock",
+      "source_system": "mock_erp_wms",
+      "as_of": "2026-10-10T10:00:00+08:00",
+      "version": 11,
+      "locations": [
+        {
+          "id": "L1-RAW",
+          "name": "原料库",
+          "floor": 1
+        },
+        {
+          "id": "L1-IQC",
+          "name": "待检区",
+          "floor": 1
+        },
+        {
+          "id": "L1-IN",
+          "name": "收货区",
+          "floor": 1
+        },
+        {
+          "id": "L2-A",
+          "name": "装配线 A",
+          "floor": 2
+        },
+        {
+          "id": "L2-B",
+          "name": "装配线 B",
+          "floor": 2
+        },
+        {
+          "id": "L2-BUF",
+          "name": "线边库",
+          "floor": 2
+        }
+      ],
+      "materials": [
+        {
+          "material_id": "MAT-001",
+          "name": "伺服电机",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-002",
+          "name": "驱动控制板",
+          "unit": "片"
+        },
+        {
+          "material_id": "MAT-003",
+          "name": "功率模块",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-004",
+          "name": "精密连接器",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-005",
+          "name": "铝合金壳体",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-006",
+          "name": "精密轴承",
+          "unit": "套"
+        },
+        {
+          "material_id": "MAT-007",
+          "name": "紧固螺钉",
+          "unit": "颗"
+        },
+        {
+          "material_id": "MAT-008",
+          "name": "成品包装箱",
+          "unit": "个"
+        }
+      ],
+      "lots": [
+        {
+          "lot_id": "LOT-001-R",
+          "material_id": "MAT-001",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 6,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-001"
+        },
+        {
+          "lot_id": "LOT-002-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 100,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-002"
+        },
+        {
+          "lot_id": "LOT-002-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q002"
+        },
+        {
+          "lot_id": "LOT-003-R",
+          "material_id": "MAT-002",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-003"
+        },
+        {
+          "lot_id": "LOT-004-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 60,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-004"
+        },
+        {
+          "lot_id": "LOT-004-Q",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q004"
+        },
+        {
+          "lot_id": "LOT-005-R",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-005"
+        },
+        {
+          "lot_id": "LOT-006-R",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 340,
+          "reserved": 160,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-006"
+        },
+        {
+          "lot_id": "LOT-006-Q",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q006"
+        },
+        {
+          "lot_id": "LOT-007-R",
+          "material_id": "MAT-004",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 260,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-007"
+        },
+        {
+          "lot_id": "LOT-008-R",
+          "material_id": "MAT-005",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-008"
+        },
+        {
+          "lot_id": "LOT-009-R",
+          "material_id": "MAT-005",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-009"
+        },
+        {
+          "lot_id": "LOT-010-R",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-010"
+        },
+        {
+          "lot_id": "LOT-010-Q",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q010"
+        },
+        {
+          "lot_id": "LOT-011-R",
+          "material_id": "MAT-006",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 140,
+          "reserved": 40,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-011"
+        },
+        {
+          "lot_id": "LOT-012-R",
+          "material_id": "MAT-007",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 14000,
+          "reserved": 8000,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-012"
+        },
+        {
+          "lot_id": "LOT-013-R",
+          "material_id": "MAT-007",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 4000,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-013"
+        },
+        {
+          "lot_id": "LOT-014-R",
+          "material_id": "MAT-008",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 130,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-014"
+        },
+        {
+          "lot_id": "LOT-015-R",
+          "material_id": "MAT-008",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-015"
+        },
+        {
+          "lot_id": "LOT-PO-501-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 50,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-29T16:10:00+08:00",
+          "version": 3,
+          "source_ref": "WMS-MOCK-RECEIPT-PO501"
+        },
+        {
+          "lot_id": "LOT-503-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T10:00:00+08:00",
+          "version": 11,
+          "source_ref": "WMS-MOCK-RECEIPT-503-01",
+          "po_id": "PO-MOCK-503"
+        },
+        {
+          "lot_id": "LOT-503-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 10,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-10-10T10:00:00+08:00",
+          "version": 11,
+          "source_ref": "WMS-MOCK-RECEIPT-503-01",
+          "po_id": "PO-MOCK-503"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "ORD-001",
+          "product": "电机备料验收样例",
+          "quantity": 10,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T14:00:00+08:00",
+          "priority": "验收",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-001",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1001",
+          "product": "SVS 驱动模组",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T15:30:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-003",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 12
+            },
+            {
+              "material_id": "MAT-008",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1002",
+          "product": "精密传动组件",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T17:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 8
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1002",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1003",
+          "product": "控制板组件",
+          "quantity": 60,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T12:00:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 6
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1003",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1004",
+          "product": "传动组件加急单",
+          "quantity": 40,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T13:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1004",
+          "version": 1
+        }
+      ],
+      "inbound": [
+        {
+          "po_id": "PO-MOCK-501",
+          "material_id": "MAT-003",
+          "quantity": 50,
+          "eta": "2026-09-29T16:00:00+08:00",
+          "status": "已收货放行",
+          "confirmed_receipt": true
+        },
+        {
+          "po_id": "PO-MOCK-502",
+          "material_id": "MAT-006",
+          "quantity": 100,
+          "eta": "2026-09-30T09:00:00+08:00",
+          "status": "待供应商发运",
+          "confirmed_receipt": false
+        },
+        {
+          "po_id": "PO-MOCK-503",
+          "material_id": "MAT-002",
+          "quantity": 50,
+          "ordered_quantity": 80,
+          "received_quantity": 30,
+          "eta": "2026-10-10T11:00:00+08:00",
+          "status": "部分收货：剩余50套在途",
+          "confirmed_receipt": false
+        }
+      ],
+      "notes": [
+        "全部为合成演示数据，不代表 SVS 企业真实现场。",
+        "预留属于其他已占用需求，不在本轮分配给新的订单。",
+        "未放行批次与未确认收货的在途采购不计入可用库存。",
+        "各订单独立做静态可用量检查，未执行多订单排产或库存分配。"
+      ],
+      "snapshot_id": "partial_receipt",
+      "title": "部分到货与待检",
+      "description": "30片到货：20片可用、10片待检；订单组仍缺40片。",
+      "transport_constraints": {
+        "from_floor": 1,
+        "to_floor": 2,
+        "available": true,
+        "reason": "提升通道可用，实际搬运时间未验证",
+        "source_ref": "WCS-MOCK-LIFT-01"
+      },
+      "business_events": [
+        {
+          "at": "2026-10-10T09:00:00+08:00",
+          "title": "两张急单同时备料",
+          "detail": "ORD-1001 与 ORD-1003 共需控制板180片；账面240片，预留100片、待检20片，净可用120片。现有预留不属于这两张待备料单。",
+          "source_ref": "ERP-MOCK-WAVE-01"
+        },
+        {
+          "at": "2026-10-10T10:00:00+08:00",
+          "title": "部分到货30片",
+          "detail": "采购80片只到30片，其中20片放行、10片待检，另50片尚未到货。到货不等于全部可用。",
+          "source_ref": "WMS-MOCK-RECEIPT-503-01"
+        }
+      ]
+    },
+    {
+      "schema_version": "demo.2.0",
+      "factory_id": "FACTORY-001",
+      "factory_name": "SVS 双层装配演示厂",
+      "data_mode": "mock",
+      "source_system": "mock_erp_wms",
+      "as_of": "2026-10-10T10:30:00+08:00",
+      "version": 12,
+      "locations": [
+        {
+          "id": "L1-RAW",
+          "name": "原料库",
+          "floor": 1
+        },
+        {
+          "id": "L1-IQC",
+          "name": "待检区",
+          "floor": 1
+        },
+        {
+          "id": "L1-IN",
+          "name": "收货区",
+          "floor": 1
+        },
+        {
+          "id": "L2-A",
+          "name": "装配线 A",
+          "floor": 2
+        },
+        {
+          "id": "L2-B",
+          "name": "装配线 B",
+          "floor": 2
+        },
+        {
+          "id": "L2-BUF",
+          "name": "线边库",
+          "floor": 2
+        }
+      ],
+      "materials": [
+        {
+          "material_id": "MAT-001",
+          "name": "伺服电机",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-002",
+          "name": "驱动控制板",
+          "unit": "片"
+        },
+        {
+          "material_id": "MAT-003",
+          "name": "功率模块",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-004",
+          "name": "精密连接器",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-005",
+          "name": "铝合金壳体",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-006",
+          "name": "精密轴承",
+          "unit": "套"
+        },
+        {
+          "material_id": "MAT-007",
+          "name": "紧固螺钉",
+          "unit": "颗"
+        },
+        {
+          "material_id": "MAT-008",
+          "name": "成品包装箱",
+          "unit": "个"
+        }
+      ],
+      "lots": [
+        {
+          "lot_id": "LOT-001-R",
+          "material_id": "MAT-001",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 6,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-001"
+        },
+        {
+          "lot_id": "LOT-002-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 100,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-002"
+        },
+        {
+          "lot_id": "LOT-002-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q002"
+        },
+        {
+          "lot_id": "LOT-003-R",
+          "material_id": "MAT-002",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-003"
+        },
+        {
+          "lot_id": "LOT-004-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 60,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-004"
+        },
+        {
+          "lot_id": "LOT-004-Q",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q004"
+        },
+        {
+          "lot_id": "LOT-005-R",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-005"
+        },
+        {
+          "lot_id": "LOT-006-R",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 340,
+          "reserved": 160,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-006"
+        },
+        {
+          "lot_id": "LOT-006-Q",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q006"
+        },
+        {
+          "lot_id": "LOT-007-R",
+          "material_id": "MAT-004",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 260,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-007"
+        },
+        {
+          "lot_id": "LOT-008-R",
+          "material_id": "MAT-005",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-008"
+        },
+        {
+          "lot_id": "LOT-009-R",
+          "material_id": "MAT-005",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-009"
+        },
+        {
+          "lot_id": "LOT-010-R",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-010"
+        },
+        {
+          "lot_id": "LOT-010-Q",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q010"
+        },
+        {
+          "lot_id": "LOT-011-R",
+          "material_id": "MAT-006",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 140,
+          "reserved": 40,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-011"
+        },
+        {
+          "lot_id": "LOT-012-R",
+          "material_id": "MAT-007",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 14000,
+          "reserved": 8000,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-012"
+        },
+        {
+          "lot_id": "LOT-013-R",
+          "material_id": "MAT-007",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 4000,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-013"
+        },
+        {
+          "lot_id": "LOT-014-R",
+          "material_id": "MAT-008",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 130,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-014"
+        },
+        {
+          "lot_id": "LOT-015-R",
+          "material_id": "MAT-008",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-015"
+        },
+        {
+          "lot_id": "LOT-PO-501-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 50,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-29T16:10:00+08:00",
+          "version": 3,
+          "source_ref": "WMS-MOCK-RECEIPT-PO501"
+        },
+        {
+          "lot_id": "LOT-503-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T10:00:00+08:00",
+          "version": 11,
+          "source_ref": "WMS-MOCK-RECEIPT-503-01",
+          "po_id": "PO-MOCK-503"
+        },
+        {
+          "lot_id": "LOT-503-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 10,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T10:00:00+08:00",
+          "version": 12,
+          "source_ref": "WMS-MOCK-RECEIPT-503-01",
+          "po_id": "PO-MOCK-503",
+          "quality_ref": "IQC-MOCK-RELEASE-503"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "ORD-001",
+          "product": "电机备料验收样例",
+          "quantity": 10,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T14:00:00+08:00",
+          "priority": "验收",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-001",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1001",
+          "product": "SVS 驱动模组",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T15:30:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-003",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 12
+            },
+            {
+              "material_id": "MAT-008",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1002",
+          "product": "精密传动组件",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T17:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 8
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1002",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1003",
+          "product": "控制板组件",
+          "quantity": 60,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T12:00:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 6
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1003",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1004",
+          "product": "传动组件加急单",
+          "quantity": 40,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T13:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1004",
+          "version": 1
+        }
+      ],
+      "inbound": [
+        {
+          "po_id": "PO-MOCK-501",
+          "material_id": "MAT-003",
+          "quantity": 50,
+          "eta": "2026-09-29T16:00:00+08:00",
+          "status": "已收货放行",
+          "confirmed_receipt": true
+        },
+        {
+          "po_id": "PO-MOCK-502",
+          "material_id": "MAT-006",
+          "quantity": 100,
+          "eta": "2026-09-30T09:00:00+08:00",
+          "status": "待供应商发运",
+          "confirmed_receipt": false
+        },
+        {
+          "po_id": "PO-MOCK-503",
+          "material_id": "MAT-002",
+          "quantity": 50,
+          "ordered_quantity": 80,
+          "received_quantity": 30,
+          "eta": "2026-10-10T11:00:00+08:00",
+          "status": "部分收货：剩余50套在途",
+          "confirmed_receipt": false
+        }
+      ],
+      "notes": [
+        "全部为合成演示数据，不代表 SVS 企业真实现场。",
+        "预留属于其他已占用需求，不在本轮分配给新的订单。",
+        "未放行批次与未确认收货的在途采购不计入可用库存。",
+        "各订单独立做静态可用量检查，未执行多订单排产或库存分配。"
+      ],
+      "snapshot_id": "quality_release",
+      "title": "质量放行",
+      "description": "账面仍270片，可用150片；订单组仍缺30片。",
+      "transport_constraints": {
+        "from_floor": 1,
+        "to_floor": 2,
+        "available": true,
+        "reason": "提升通道可用，实际搬运时间未验证",
+        "source_ref": "WCS-MOCK-LIFT-01"
+      },
+      "business_events": [
+        {
+          "at": "2026-10-10T09:00:00+08:00",
+          "title": "两张急单同时备料",
+          "detail": "ORD-1001 与 ORD-1003 共需控制板180片；账面240片，预留100片、待检20片，净可用120片。现有预留不属于这两张待备料单。",
+          "source_ref": "ERP-MOCK-WAVE-01"
+        },
+        {
+          "at": "2026-10-10T10:00:00+08:00",
+          "title": "部分到货30片",
+          "detail": "采购80片只到30片，其中20片放行、10片待检，另50片尚未到货。到货不等于全部可用。",
+          "source_ref": "WMS-MOCK-RECEIPT-503-01"
+        },
+        {
+          "at": "2026-10-10T10:30:00+08:00",
+          "title": "已到货10片质量放行",
+          "detail": "账面数量不变，待检减少10片，可用量增加10片，订单组缺口降至30片。",
+          "source_ref": "IQC-MOCK-RELEASE-503"
+        }
+      ]
+    },
+    {
+      "schema_version": "demo.2.0",
+      "factory_id": "FACTORY-001",
+      "factory_name": "SVS 双层装配演示厂",
+      "data_mode": "mock",
+      "source_system": "mock_erp_wms",
+      "as_of": "2026-10-10T11:00:00+08:00",
+      "version": 13,
+      "locations": [
+        {
+          "id": "L1-RAW",
+          "name": "原料库",
+          "floor": 1
+        },
+        {
+          "id": "L1-IQC",
+          "name": "待检区",
+          "floor": 1
+        },
+        {
+          "id": "L1-IN",
+          "name": "收货区",
+          "floor": 1
+        },
+        {
+          "id": "L2-A",
+          "name": "装配线 A",
+          "floor": 2
+        },
+        {
+          "id": "L2-B",
+          "name": "装配线 B",
+          "floor": 2
+        },
+        {
+          "id": "L2-BUF",
+          "name": "线边库",
+          "floor": 2
+        }
+      ],
+      "materials": [
+        {
+          "material_id": "MAT-001",
+          "name": "伺服电机",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-002",
+          "name": "驱动控制板",
+          "unit": "片"
+        },
+        {
+          "material_id": "MAT-003",
+          "name": "功率模块",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-004",
+          "name": "精密连接器",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-005",
+          "name": "铝合金壳体",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-006",
+          "name": "精密轴承",
+          "unit": "套"
+        },
+        {
+          "material_id": "MAT-007",
+          "name": "紧固螺钉",
+          "unit": "颗"
+        },
+        {
+          "material_id": "MAT-008",
+          "name": "成品包装箱",
+          "unit": "个"
+        }
+      ],
+      "lots": [
+        {
+          "lot_id": "LOT-001-R",
+          "material_id": "MAT-001",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 6,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-001"
+        },
+        {
+          "lot_id": "LOT-002-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 100,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-002"
+        },
+        {
+          "lot_id": "LOT-002-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q002"
+        },
+        {
+          "lot_id": "LOT-003-R",
+          "material_id": "MAT-002",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-003"
+        },
+        {
+          "lot_id": "LOT-004-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 60,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-004"
+        },
+        {
+          "lot_id": "LOT-004-Q",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q004"
+        },
+        {
+          "lot_id": "LOT-005-R",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-005"
+        },
+        {
+          "lot_id": "LOT-006-R",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 340,
+          "reserved": 160,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-006"
+        },
+        {
+          "lot_id": "LOT-006-Q",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q006"
+        },
+        {
+          "lot_id": "LOT-007-R",
+          "material_id": "MAT-004",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 260,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-007"
+        },
+        {
+          "lot_id": "LOT-008-R",
+          "material_id": "MAT-005",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-008"
+        },
+        {
+          "lot_id": "LOT-009-R",
+          "material_id": "MAT-005",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-009"
+        },
+        {
+          "lot_id": "LOT-010-R",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-010"
+        },
+        {
+          "lot_id": "LOT-010-Q",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q010"
+        },
+        {
+          "lot_id": "LOT-011-R",
+          "material_id": "MAT-006",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 140,
+          "reserved": 40,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-011"
+        },
+        {
+          "lot_id": "LOT-012-R",
+          "material_id": "MAT-007",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 14000,
+          "reserved": 8000,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-012"
+        },
+        {
+          "lot_id": "LOT-013-R",
+          "material_id": "MAT-007",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 4000,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-013"
+        },
+        {
+          "lot_id": "LOT-014-R",
+          "material_id": "MAT-008",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 130,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-014"
+        },
+        {
+          "lot_id": "LOT-015-R",
+          "material_id": "MAT-008",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-015"
+        },
+        {
+          "lot_id": "LOT-PO-501-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 50,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-29T16:10:00+08:00",
+          "version": 3,
+          "source_ref": "WMS-MOCK-RECEIPT-PO501"
+        },
+        {
+          "lot_id": "LOT-503-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T10:00:00+08:00",
+          "version": 11,
+          "source_ref": "WMS-MOCK-RECEIPT-503-01",
+          "po_id": "PO-MOCK-503"
+        },
+        {
+          "lot_id": "LOT-503-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 10,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T10:00:00+08:00",
+          "version": 12,
+          "source_ref": "WMS-MOCK-RECEIPT-503-01",
+          "po_id": "PO-MOCK-503",
+          "quality_ref": "IQC-MOCK-RELEASE-503"
+        },
+        {
+          "lot_id": "LOT-503-R2",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 50,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T11:00:00+08:00",
+          "version": 13,
+          "source_ref": "WMS-MOCK-RECEIPT-503-02",
+          "po_id": "PO-MOCK-503"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "ORD-001",
+          "product": "电机备料验收样例",
+          "quantity": 10,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T14:00:00+08:00",
+          "priority": "验收",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-001",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1001",
+          "product": "SVS 驱动模组",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T15:30:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-003",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 12
+            },
+            {
+              "material_id": "MAT-008",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1002",
+          "product": "精密传动组件",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T17:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 8
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1002",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1003",
+          "product": "控制板组件",
+          "quantity": 60,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T12:00:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 6
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1003",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1004",
+          "product": "传动组件加急单",
+          "quantity": 40,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T13:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1004",
+          "version": 1
+        }
+      ],
+      "inbound": [
+        {
+          "po_id": "PO-MOCK-501",
+          "material_id": "MAT-003",
+          "quantity": 50,
+          "eta": "2026-09-29T16:00:00+08:00",
+          "status": "已收货放行",
+          "confirmed_receipt": true
+        },
+        {
+          "po_id": "PO-MOCK-502",
+          "material_id": "MAT-006",
+          "quantity": 100,
+          "eta": "2026-09-30T09:00:00+08:00",
+          "status": "待供应商发运",
+          "confirmed_receipt": false
+        },
+        {
+          "po_id": "PO-MOCK-503",
+          "material_id": "MAT-002",
+          "quantity": 0,
+          "ordered_quantity": 80,
+          "received_quantity": 80,
+          "eta": "2026-10-10T11:00:00+08:00",
+          "status": "已全部确认收货",
+          "confirmed_receipt": true
+        }
+      ],
+      "notes": [
+        "全部为合成演示数据，不代表 SVS 企业真实现场。",
+        "预留属于其他已占用需求，不在本轮分配给新的订单。",
+        "未放行批次与未确认收货的在途采购不计入可用库存。",
+        "各订单独立做静态可用量检查，未执行多订单排产或库存分配。"
+      ],
+      "snapshot_id": "group_replenished",
+      "title": "补齐共同缺口",
+      "description": "控制板可用200片，两张订单共需180片；库存满足，线边未齐。",
+      "transport_constraints": {
+        "from_floor": 1,
+        "to_floor": 2,
+        "available": true,
+        "reason": "提升通道可用，实际搬运时间未验证",
+        "source_ref": "WCS-MOCK-LIFT-01"
+      },
+      "business_events": [
+        {
+          "at": "2026-10-10T09:00:00+08:00",
+          "title": "两张急单同时备料",
+          "detail": "ORD-1001 与 ORD-1003 共需控制板180片；账面240片，预留100片、待检20片，净可用120片。现有预留不属于这两张待备料单。",
+          "source_ref": "ERP-MOCK-WAVE-01"
+        },
+        {
+          "at": "2026-10-10T10:00:00+08:00",
+          "title": "部分到货30片",
+          "detail": "采购80片只到30片，其中20片放行、10片待检，另50片尚未到货。到货不等于全部可用。",
+          "source_ref": "WMS-MOCK-RECEIPT-503-01"
+        },
+        {
+          "at": "2026-10-10T10:30:00+08:00",
+          "title": "已到货10片质量放行",
+          "detail": "账面数量不变，待检减少10片，可用量增加10片，订单组缺口降至30片。",
+          "source_ref": "IQC-MOCK-RELEASE-503"
+        },
+        {
+          "at": "2026-10-10T11:00:00+08:00",
+          "title": "剩余50片确认收货并放行",
+          "detail": "采购80片全部进入批次账面，不能再把采购数量额外加一次；订单组全厂物料齐片，仍需跨层备料。",
+          "source_ref": "WMS-MOCK-RECEIPT-503-02"
+        }
+      ]
+    },
+    {
+      "schema_version": "demo.2.0",
+      "factory_id": "FACTORY-001",
+      "factory_name": "SVS 双层装配演示厂",
+      "data_mode": "mock",
+      "source_system": "mock_erp_wms",
+      "as_of": "2026-10-10T11:10:00+08:00",
+      "version": 14,
+      "locations": [
+        {
+          "id": "L1-RAW",
+          "name": "原料库",
+          "floor": 1
+        },
+        {
+          "id": "L1-IQC",
+          "name": "待检区",
+          "floor": 1
+        },
+        {
+          "id": "L1-IN",
+          "name": "收货区",
+          "floor": 1
+        },
+        {
+          "id": "L2-A",
+          "name": "装配线 A",
+          "floor": 2
+        },
+        {
+          "id": "L2-B",
+          "name": "装配线 B",
+          "floor": 2
+        },
+        {
+          "id": "L2-BUF",
+          "name": "线边库",
+          "floor": 2
+        }
+      ],
+      "materials": [
+        {
+          "material_id": "MAT-001",
+          "name": "伺服电机",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-002",
+          "name": "驱动控制板",
+          "unit": "片"
+        },
+        {
+          "material_id": "MAT-003",
+          "name": "功率模块",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-004",
+          "name": "精密连接器",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-005",
+          "name": "铝合金壳体",
+          "unit": "件"
+        },
+        {
+          "material_id": "MAT-006",
+          "name": "精密轴承",
+          "unit": "套"
+        },
+        {
+          "material_id": "MAT-007",
+          "name": "紧固螺钉",
+          "unit": "颗"
+        },
+        {
+          "material_id": "MAT-008",
+          "name": "成品包装箱",
+          "unit": "个"
+        }
+      ],
+      "lots": [
+        {
+          "lot_id": "LOT-001-R",
+          "material_id": "MAT-001",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 6,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-001"
+        },
+        {
+          "lot_id": "LOT-002-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 100,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-002"
+        },
+        {
+          "lot_id": "LOT-002-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q002"
+        },
+        {
+          "lot_id": "LOT-003-R",
+          "material_id": "MAT-002",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-003"
+        },
+        {
+          "lot_id": "LOT-004-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 60,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-004"
+        },
+        {
+          "lot_id": "LOT-004-Q",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q004"
+        },
+        {
+          "lot_id": "LOT-005-R",
+          "material_id": "MAT-003",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 60,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-005"
+        },
+        {
+          "lot_id": "LOT-006-R",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 340,
+          "reserved": 160,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-006"
+        },
+        {
+          "lot_id": "LOT-006-Q",
+          "material_id": "MAT-004",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q006"
+        },
+        {
+          "lot_id": "LOT-007-R",
+          "material_id": "MAT-004",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 260,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-007"
+        },
+        {
+          "lot_id": "LOT-008-R",
+          "material_id": "MAT-005",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-008"
+        },
+        {
+          "lot_id": "LOT-009-R",
+          "material_id": "MAT-005",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 80,
+          "reserved": 20,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-009"
+        },
+        {
+          "lot_id": "LOT-010-R",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 140,
+          "reserved": 60,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-010"
+        },
+        {
+          "lot_id": "LOT-010-Q",
+          "material_id": "MAT-006",
+          "floor": 1,
+          "location_id": "L1-IQC",
+          "on_hand": 40,
+          "reserved": 0,
+          "quality": "hold",
+          "received_at": "2026-09-29T07:40:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-Q010"
+        },
+        {
+          "lot_id": "LOT-011-R",
+          "material_id": "MAT-006",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 140,
+          "reserved": 40,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-011"
+        },
+        {
+          "lot_id": "LOT-012-R",
+          "material_id": "MAT-007",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 14000,
+          "reserved": 8000,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-012"
+        },
+        {
+          "lot_id": "LOT-013-R",
+          "material_id": "MAT-007",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 4000,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-013"
+        },
+        {
+          "lot_id": "LOT-014-R",
+          "material_id": "MAT-008",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 130,
+          "reserved": 30,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-014"
+        },
+        {
+          "lot_id": "LOT-015-R",
+          "material_id": "MAT-008",
+          "floor": 2,
+          "location_id": "L2-BUF",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-28T16:20:00+08:00",
+          "version": 1,
+          "source_ref": "WMS-MOCK-015"
+        },
+        {
+          "lot_id": "LOT-PO-501-R",
+          "material_id": "MAT-003",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 50,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-09-29T16:10:00+08:00",
+          "version": 3,
+          "source_ref": "WMS-MOCK-RECEIPT-PO501"
+        },
+        {
+          "lot_id": "LOT-503-R",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 20,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T10:00:00+08:00",
+          "version": 11,
+          "source_ref": "WMS-MOCK-RECEIPT-503-01",
+          "po_id": "PO-MOCK-503"
+        },
+        {
+          "lot_id": "LOT-503-Q",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-RAW",
+          "on_hand": 10,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T10:00:00+08:00",
+          "version": 12,
+          "source_ref": "WMS-MOCK-RECEIPT-503-01",
+          "po_id": "PO-MOCK-503",
+          "quality_ref": "IQC-MOCK-RELEASE-503"
+        },
+        {
+          "lot_id": "LOT-503-R2",
+          "material_id": "MAT-002",
+          "floor": 1,
+          "location_id": "L1-IN",
+          "on_hand": 50,
+          "reserved": 0,
+          "quality": "released",
+          "received_at": "2026-10-10T11:00:00+08:00",
+          "version": 13,
+          "source_ref": "WMS-MOCK-RECEIPT-503-02",
+          "po_id": "PO-MOCK-503"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "ORD-001",
+          "product": "电机备料验收样例",
+          "quantity": 10,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T14:00:00+08:00",
+          "priority": "验收",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-001",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1001",
+          "product": "SVS 驱动模组",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T15:30:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-003",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 12
+            },
+            {
+              "material_id": "MAT-008",
+              "per_unit": 1
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1001",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1002",
+          "product": "精密传动组件",
+          "quantity": 120,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T17:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 8
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1002",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1003",
+          "product": "控制板组件",
+          "quantity": 60,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-A",
+          "due_at": "2026-10-10T12:00:00+08:00",
+          "priority": "紧急",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-002",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-007",
+              "per_unit": 6
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1003",
+          "version": 1
+        },
+        {
+          "order_id": "ORD-1004",
+          "product": "传动组件加急单",
+          "quantity": 40,
+          "unit": "台",
+          "target_floor": 2,
+          "line_id": "L2-B",
+          "due_at": "2026-10-10T13:00:00+08:00",
+          "priority": "正常",
+          "status": "待备料",
+          "bom": [
+            {
+              "material_id": "MAT-006",
+              "per_unit": 2
+            },
+            {
+              "material_id": "MAT-005",
+              "per_unit": 1
+            },
+            {
+              "material_id": "MAT-004",
+              "per_unit": 2
+            }
+          ],
+          "source_ref": "ERP-MOCK-ORD-1004",
+          "version": 1
+        }
+      ],
+      "inbound": [
+        {
+          "po_id": "PO-MOCK-501",
+          "material_id": "MAT-003",
+          "quantity": 50,
+          "eta": "2026-09-29T16:00:00+08:00",
+          "status": "已收货放行",
+          "confirmed_receipt": true
+        },
+        {
+          "po_id": "PO-MOCK-502",
+          "material_id": "MAT-006",
+          "quantity": 100,
+          "eta": "2026-09-30T09:00:00+08:00",
+          "status": "待供应商发运",
+          "confirmed_receipt": false
+        },
+        {
+          "po_id": "PO-MOCK-503",
+          "material_id": "MAT-002",
+          "quantity": 0,
+          "ordered_quantity": 80,
+          "received_quantity": 80,
+          "eta": "2026-10-10T11:00:00+08:00",
+          "status": "已全部确认收货",
+          "confirmed_receipt": true
+        }
+      ],
+      "notes": [
+        "全部为合成演示数据，不代表 SVS 企业真实现场。",
+        "预留属于其他已占用需求，不在本轮分配给新的订单。",
+        "未放行批次与未确认收货的在途采购不计入可用库存。",
+        "各订单独立做静态可用量检查，未执行多订单排产或库存分配。"
+      ],
+      "snapshot_id": "lift_blocked",
+      "title": "跨层通道停用",
+      "description": "物料齐片，但控制板、功率模块、连接器、铝壳和包装箱跨层备料受阻。",
+      "transport_constraints": {
+        "from_floor": 1,
+        "to_floor": 2,
+        "available": false,
+        "reason": "提升通道临时停用，跨层备料阻塞；无替代路线证据",
+        "source_ref": "WCS-MOCK-LIFT-STOP-01"
+      },
+      "business_events": [
+        {
+          "at": "2026-10-10T09:00:00+08:00",
+          "title": "两张急单同时备料",
+          "detail": "ORD-1001 与 ORD-1003 共需控制板180片；账面240片，预留100片、待检20片，净可用120片。现有预留不属于这两张待备料单。",
+          "source_ref": "ERP-MOCK-WAVE-01"
+        },
+        {
+          "at": "2026-10-10T10:00:00+08:00",
+          "title": "部分到货30片",
+          "detail": "采购80片只到30片，其中20片放行、10片待检，另50片尚未到货。到货不等于全部可用。",
+          "source_ref": "WMS-MOCK-RECEIPT-503-01"
+        },
+        {
+          "at": "2026-10-10T10:30:00+08:00",
+          "title": "已到货10片质量放行",
+          "detail": "账面数量不变，待检减少10片，可用量增加10片，订单组缺口降至30片。",
+          "source_ref": "IQC-MOCK-RELEASE-503"
+        },
+        {
+          "at": "2026-10-10T11:00:00+08:00",
+          "title": "剩余50片确认收货并放行",
+          "detail": "采购80片全部进入批次账面，不能再把采购数量额外加一次；订单组全厂物料齐片，仍需跨层备料。",
+          "source_ref": "WMS-MOCK-RECEIPT-503-02"
+        },
+        {
+          "at": "2026-10-10T11:10:00+08:00",
+          "title": "提升通道临时停用",
+          "detail": "全厂库存不变，但一层到二层的备料不能直接承诺执行，不得将库存齐片当作按时交付。",
+          "source_ref": "WCS-MOCK-LIFT-STOP-01"
+        }
+      ]
+    }
+  ]
+}

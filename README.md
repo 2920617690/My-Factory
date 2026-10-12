@@ -16,9 +16,12 @@ docs/architecture/ 边界、接口细化与决策记录
 docs/track-runtime/开源审查、平台交接、实际验收
 docs/sources/      四份新文档原件及摘要校验
 tests/integration/ Runtime 传输检查；完整三方测试待接入
+demos/             临时交付工作台，可直接操作 Runtime 验证
 ```
 
 先看 [Runtime 运行说明](runtime/README.md)、[平台交接说明](docs/track-runtime/handoff_platform.md) 和 [阶段报告](docs/track-runtime/report.md)。本机 Runtime 服务为 http://127.0.0.1:18342/；它是平台调用入口，没有新的产品页面。原演示 18340 和 Foundation 先导工作台 18341 保持各自职责。
+
+2026-10-12 新增 [Runtime 现场验证工作台](demos/foundation-workbench/README.md)：本机打开 http://127.0.0.1:18341/#runtime，可点击执行单订单/订单组库存分析、设备检查、旧契约转换和无效输入拒绝，查看新生成的执行编号、实际结果与插件轨迹。浏览器通过临时工作台后台的 HttpRuntimeClient 调用独立 Runtime，不直连 Runtime。该演示源自既有 Foundation 工作台，单独放在 demos 中；不替代两位学弟的 Frontend/Platform 交付，不把临时网关验证记为完整三方 Gate。
 
 ## 整个系统如何继续构建
 
