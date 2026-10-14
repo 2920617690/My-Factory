@@ -1,5 +1,32 @@
-# Frontend Track 接收位置
+# React + TypeScript + Vite
 
-新阶段 Track A；复用原数字孪生 POC。用户确认源码在学弟电脑上，本机尚未接收。这里没有已完成的 R3F 页面。
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-接收时附：实际源码与模板目录、锁文件和许可、双层场景与对象选择证据、FactoryClient/MSW 切换位置、Task 成功/失败 UI、自动测试和运行方式。Frontend 只调用 Platform，不能直连本目录 Runtime 服务。原 Foundation `app` 是已有先导展示，不替代此 Track 的数字孪生验收。
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+```
+
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
