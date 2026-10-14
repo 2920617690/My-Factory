@@ -21,3 +21,11 @@ runtime/evidence/raw/
 runtime/evidence/source-manifest.json
 runtime/evidence/package-checks.json
 runtime/evidence/git-publication.json
+
+# Frontend local outputs
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+frontend/.env
+frontend/.env.*
